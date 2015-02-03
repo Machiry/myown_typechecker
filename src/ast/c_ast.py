@@ -1,21 +1,3 @@
-#-----------------------------------------------------------------
-# ** ATTENTION **
-# This code was automatically generated from the file:
-# _c_ast.cfg
-#
-# Do not modify it directly. Modify the configuration file and
-# run the generator again.
-# ** ** *** ** **
-#
-# pycparser: c_ast.py
-#
-# AST Node classes.
-#
-# Copyright (C) 2008-2013, Eli Bendersky
-# License: BSD
-#-----------------------------------------------------------------
-
-
 import sys
 
 
@@ -76,6 +58,7 @@ class Node(object):
                 nodenames=nodenames,
                 showcoord=showcoord,
                 _my_node_name=child_name)
+        
 
 
 class NodeVisitor(object):

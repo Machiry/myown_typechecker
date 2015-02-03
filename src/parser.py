@@ -50,10 +50,13 @@ class MyOwnParser(PLYParser):
                                     | empty
         '''
         #print "p_translation_unit_or_empty"
-        if len(p[1]) > 1:
-            p[0] = p[1]
+        if p[1]:
+            if len(p[1]) > 1:
+                p[0] = p[1]
+            else:
+                p[0] = [p[1]]
         else:
-            p[0] = [p[1]]
+            p[0] = None
 
     def p_translation_unit_1(self,p):
         ''' translation_unit : external_declaration
@@ -113,6 +116,7 @@ class MyOwnParser(PLYParser):
         ''' expression_statement : assignment_statement SEMI
                                  | func_call SEMI
                                  | declarator SEMI
+                                 | ret SEMI
         '''
         p[0] = p[1]
 
@@ -143,7 +147,7 @@ class MyOwnParser(PLYParser):
         start = 1
         if len(p) > 4:
             start += 1
-        p[0] = BinaryOp(p[start+1],p[start],p[start+2],coord=p[start+1].coord)
+        p[0] = BinaryOp(p[start+1],p[start],p[start+2],coord=p[start].coord)
 
     def p_unary_expression(self,p):
         ''' unary_expression : id
@@ -154,6 +158,8 @@ class MyOwnParser(PLYParser):
     def p_bin_op(self,p):
         ''' bin_op : PLUS
                    | MINUS
+                   | MULTI
+                   | DIV
         '''
         p[0] = p[1]
         
@@ -264,7 +270,7 @@ class MyOwnParser(PLYParser):
             param_list : empty
         '''
         #print 'p_param_list_1'
-        p[0] = []
+        p[0] = DeclList([])
         
     def p_param_list_2(self,p):
         '''
@@ -284,10 +290,16 @@ class MyOwnParser(PLYParser):
         decl_list = DeclList(decls,coord=p[1].coord)
         #print str(decl_list)
         p[0] = decl_list
+    
+    def p_ret(self,p):
+        '''
+            ret : RET LPAREN unary_expression RPAREN
+        '''
+        p[0] = Return(p[3],coord=p[3].coord)
 
     def p_empty(self,p):
         'empty : '
         p[0] = None
 
     def p_error(self,p):
-        print self.TAG + 'Error occured during parsing:' + str(self,p)
+        print self.TAG + 'Error occured during parsing:' + str(p)

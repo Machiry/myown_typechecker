@@ -16,99 +16,107 @@ Rule 10    statement -> if_statement statement
 Rule 11    expression_statement -> assignment_statement SEMI
 Rule 12    expression_statement -> func_call SEMI
 Rule 13    expression_statement -> declarator SEMI
-Rule 14    assignment_statement -> id EQUALS expression
-Rule 15    assignment_statement -> id EQUALS func_call
-Rule 16    expression -> unary_expression
-Rule 17    expression -> binary_expression
-Rule 18    expression -> cond_expression
-Rule 19    binary_expression -> unary_expression bin_op unary_expression
-Rule 20    binary_expression -> unary_expression bin_op binary_expression
-Rule 21    binary_expression -> binary_expression bin_op binary_expression
-Rule 22    binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN
-Rule 23    binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN
-Rule 24    binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN
-Rule 25    unary_expression -> id
-Rule 26    unary_expression -> int_const
-Rule 27    bin_op -> PLUS
-Rule 28    bin_op -> MINUS
-Rule 29    cond_expression -> unary_expression GT unary_expression
-Rule 30    cond_expression -> unary_expression LT unary_expression
-Rule 31    cond_expression -> unary_expression EQ unary_expression
-Rule 32    cond_expression -> LPAREN unary_expression GT unary_expression RPAREN
-Rule 33    cond_expression -> LPAREN unary_expression LT unary_expression RPAREN
-Rule 34    cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN
-Rule 35    cond_expression -> cond_expression OR cond_expression
-Rule 36    cond_expression -> NOT cond_expression
-Rule 37    cond_expression -> LPAREN cond_expression OR cond_expression RPAREN
-Rule 38    cond_expression -> NOT LPAREN cond_expression RPAREN
-Rule 39    if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
-Rule 40    func_call -> ID LPAREN arg_list RPAREN
-Rule 41    arg_list -> empty
-Rule 42    arg_list -> id
-Rule 43    arg_list -> int_const
-Rule 44    arg_list -> str_const
-Rule 45    arg_list -> id COMMA arg_list
-Rule 46    arg_list -> int_const COMMA arg_list
-Rule 47    arg_list -> str_const COMMA arg_list
-Rule 48    int_const -> ICONST
-Rule 49    str_const -> SCONST
-Rule 50    id -> ID
-Rule 51    function_declaration -> func_decl SEMI
-Rule 52    func_decl -> TYPEID ID LPAREN param_list RPAREN
-Rule 53    declarator -> TYPEID ID
-Rule 54    param_list -> empty
-Rule 55    param_list -> declarator
-Rule 56    param_list -> declarator COMMA param_list
-Rule 57    empty -> <empty>
+Rule 14    expression_statement -> ret SEMI
+Rule 15    assignment_statement -> id EQUALS expression
+Rule 16    assignment_statement -> id EQUALS func_call
+Rule 17    expression -> unary_expression
+Rule 18    expression -> binary_expression
+Rule 19    expression -> cond_expression
+Rule 20    binary_expression -> unary_expression bin_op unary_expression
+Rule 21    binary_expression -> unary_expression bin_op binary_expression
+Rule 22    binary_expression -> binary_expression bin_op binary_expression
+Rule 23    binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN
+Rule 24    binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN
+Rule 25    binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN
+Rule 26    unary_expression -> id
+Rule 27    unary_expression -> int_const
+Rule 28    bin_op -> PLUS
+Rule 29    bin_op -> MINUS
+Rule 30    bin_op -> MULTI
+Rule 31    bin_op -> DIV
+Rule 32    cond_expression -> unary_expression GT unary_expression
+Rule 33    cond_expression -> unary_expression LT unary_expression
+Rule 34    cond_expression -> unary_expression EQ unary_expression
+Rule 35    cond_expression -> LPAREN unary_expression GT unary_expression RPAREN
+Rule 36    cond_expression -> LPAREN unary_expression LT unary_expression RPAREN
+Rule 37    cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN
+Rule 38    cond_expression -> cond_expression OR cond_expression
+Rule 39    cond_expression -> NOT cond_expression
+Rule 40    cond_expression -> LPAREN cond_expression OR cond_expression RPAREN
+Rule 41    cond_expression -> NOT LPAREN cond_expression RPAREN
+Rule 42    if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
+Rule 43    func_call -> ID LPAREN arg_list RPAREN
+Rule 44    arg_list -> empty
+Rule 45    arg_list -> id
+Rule 46    arg_list -> int_const
+Rule 47    arg_list -> str_const
+Rule 48    arg_list -> id COMMA arg_list
+Rule 49    arg_list -> int_const COMMA arg_list
+Rule 50    arg_list -> str_const COMMA arg_list
+Rule 51    int_const -> ICONST
+Rule 52    str_const -> SCONST
+Rule 53    id -> ID
+Rule 54    function_declaration -> func_decl SEMI
+Rule 55    func_decl -> TYPEID ID LPAREN param_list RPAREN
+Rule 56    declarator -> TYPEID ID
+Rule 57    param_list -> empty
+Rule 58    param_list -> declarator
+Rule 59    param_list -> declarator COMMA param_list
+Rule 60    ret -> RET LPAREN unary_expression RPAREN
+Rule 61    empty -> <empty>
 
 Terminals, with rules where they appear
 
-COMMA                : 45 46 47 56
-EQ                   : 31 34
-EQUALS               : 14 15
-GT                   : 29 32
-ICONST               : 48
-ID                   : 40 50 52 53
-IF                   : 39
-LBRACE               : 7 39
-LPAREN               : 22 23 24 32 33 34 37 38 39 40 52
-LT                   : 30 33
-MINUS                : 28
-NOT                  : 36 38
-OR                   : 35 37
-PLUS                 : 27
-RBRACE               : 7 39
-RPAREN               : 22 23 24 32 33 34 37 38 39 40 52
-SCONST               : 49
-SEMI                 : 11 12 13 51
-TYPEID               : 52 53
+COMMA                : 48 49 50 59
+DIV                  : 31
+EQ                   : 34 37
+EQUALS               : 15 16
+GT                   : 32 35
+ICONST               : 51
+ID                   : 43 53 55 56
+IF                   : 42
+LBRACE               : 7 42
+LPAREN               : 23 24 25 35 36 37 40 41 42 43 55 60
+LT                   : 33 36
+MINUS                : 29
+MULTI                : 30
+NOT                  : 39 41
+OR                   : 38 40
+PLUS                 : 28
+RBRACE               : 7 42
+RET                  : 60
+RPAREN               : 23 24 25 35 36 37 40 41 42 43 55 60
+SCONST               : 52
+SEMI                 : 11 12 13 14 54
+TYPEID               : 55 56
 error                : 
 
 Nonterminals, with rules where they appear
 
-arg_list             : 40 45 46 47
+arg_list             : 43 48 49 50
 assignment_statement : 11
-bin_op               : 19 20 21 22 23 24
-binary_expression    : 17 20 21 21 23 24 24
-cond_expression      : 18 35 35 36 37 37 38 39
-declarator           : 13 55 56
-empty                : 2 8 41 54
-expression           : 14
+bin_op               : 20 21 22 23 24 25
+binary_expression    : 18 21 22 22 24 25 25
+cond_expression      : 19 38 38 39 40 40 41 42
+declarator           : 13 58 59
+empty                : 2 8 44 57
+expression           : 15
 expression_statement : 9
 external_declaration : 3 4
-func_call            : 12 15
-func_decl            : 7 51
+func_call            : 12 16
+func_decl            : 7 54
 function_declaration : 5
 function_definition  : 6
-id                   : 14 15 25 42 45
+id                   : 15 16 26 45 48
 if_statement         : 10
-int_const            : 26 43 46
-param_list           : 52 56
-statement            : 7 9 10 39
-str_const            : 44 47
+int_const            : 27 46 49
+param_list           : 55 59
+ret                  : 14
+statement            : 7 9 10 42
+str_const            : 47 50
 translation_unit     : 1 4
 translation_unit_or_empty : 0
-unary_expression     : 16 19 19 20 22 22 23 29 29 30 30 31 31 32 32 33 33 34 34
+unary_expression     : 17 20 20 21 23 23 24 32 32 33 33 34 34 35 35 36 36 37 37 60
 
 Parsing method: LALR
 
@@ -119,14 +127,14 @@ state 0
     (2) translation_unit_or_empty -> . empty
     (3) translation_unit -> . external_declaration
     (4) translation_unit -> . translation_unit external_declaration
-    (57) empty -> .
+    (61) empty -> .
     (5) external_declaration -> . function_declaration
     (6) external_declaration -> . function_definition
-    (51) function_declaration -> . func_decl SEMI
+    (54) function_declaration -> . func_decl SEMI
     (7) function_definition -> . func_decl LBRACE statement RBRACE
-    (52) func_decl -> . TYPEID ID LPAREN param_list RPAREN
+    (55) func_decl -> . TYPEID ID LPAREN param_list RPAREN
 
-    $end            reduce using rule 57 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
     TYPEID          shift and go to state 2
 
     external_declaration           shift and go to state 1
@@ -147,7 +155,7 @@ state 1
 
 state 2
 
-    (52) func_decl -> TYPEID . ID LPAREN param_list RPAREN
+    (55) func_decl -> TYPEID . ID LPAREN param_list RPAREN
 
     ID              shift and go to state 9
 
@@ -162,7 +170,7 @@ state 3
 
 state 4
 
-    (51) function_declaration -> func_decl . SEMI
+    (54) function_declaration -> func_decl . SEMI
     (7) function_definition -> func_decl . LBRACE statement RBRACE
 
     SEMI            shift and go to state 11
@@ -189,9 +197,9 @@ state 7
     (4) translation_unit -> translation_unit . external_declaration
     (5) external_declaration -> . function_declaration
     (6) external_declaration -> . function_definition
-    (51) function_declaration -> . func_decl SEMI
+    (54) function_declaration -> . func_decl SEMI
     (7) function_definition -> . func_decl LBRACE statement RBRACE
-    (52) func_decl -> . TYPEID ID LPAREN param_list RPAREN
+    (55) func_decl -> . TYPEID ID LPAREN param_list RPAREN
 
     $end            reduce using rule 1 (translation_unit_or_empty -> translation_unit .)
     TYPEID          shift and go to state 2
@@ -210,7 +218,7 @@ state 8
 
 state 9
 
-    (52) func_decl -> TYPEID ID . LPAREN param_list RPAREN
+    (55) func_decl -> TYPEID ID . LPAREN param_list RPAREN
 
     LPAREN          shift and go to state 13
 
@@ -221,37 +229,41 @@ state 10
     (8) statement -> . empty
     (9) statement -> . expression_statement statement
     (10) statement -> . if_statement statement
-    (57) empty -> .
+    (61) empty -> .
     (11) expression_statement -> . assignment_statement SEMI
     (12) expression_statement -> . func_call SEMI
     (13) expression_statement -> . declarator SEMI
-    (39) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
-    (14) assignment_statement -> . id EQUALS expression
-    (15) assignment_statement -> . id EQUALS func_call
-    (40) func_call -> . ID LPAREN arg_list RPAREN
-    (53) declarator -> . TYPEID ID
-    (50) id -> . ID
+    (14) expression_statement -> . ret SEMI
+    (42) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
+    (15) assignment_statement -> . id EQUALS expression
+    (16) assignment_statement -> . id EQUALS func_call
+    (43) func_call -> . ID LPAREN arg_list RPAREN
+    (56) declarator -> . TYPEID ID
+    (60) ret -> . RET LPAREN unary_expression RPAREN
+    (53) id -> . ID
 
-    RBRACE          reduce using rule 57 (empty -> .)
-    IF              shift and go to state 24
-    ID              shift and go to state 20
-    TYPEID          shift and go to state 16
+    RBRACE          reduce using rule 61 (empty -> .)
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    TYPEID          shift and go to state 25
+    RET             shift and go to state 15
 
     expression_statement           shift and go to state 14
-    func_call                      shift and go to state 15
+    func_call                      shift and go to state 24
     assignment_statement           shift and go to state 17
-    statement                      shift and go to state 18
-    declarator                     shift and go to state 19
-    if_statement                   shift and go to state 21
-    id                             shift and go to state 22
-    empty                          shift and go to state 23
+    ret                            shift and go to state 18
+    statement                      shift and go to state 19
+    declarator                     shift and go to state 26
+    if_statement                   shift and go to state 20
+    id                             shift and go to state 16
+    empty                          shift and go to state 21
 
 state 11
 
-    (51) function_declaration -> func_decl SEMI .
+    (54) function_declaration -> func_decl SEMI .
 
-    TYPEID          reduce using rule 51 (function_declaration -> func_decl SEMI .)
-    $end            reduce using rule 51 (function_declaration -> func_decl SEMI .)
+    TYPEID          reduce using rule 54 (function_declaration -> func_decl SEMI .)
+    $end            reduce using rule 54 (function_declaration -> func_decl SEMI .)
 
 
 state 12
@@ -264,19 +276,19 @@ state 12
 
 state 13
 
-    (52) func_decl -> TYPEID ID LPAREN . param_list RPAREN
-    (54) param_list -> . empty
-    (55) param_list -> . declarator
-    (56) param_list -> . declarator COMMA param_list
-    (57) empty -> .
-    (53) declarator -> . TYPEID ID
+    (55) func_decl -> TYPEID ID LPAREN . param_list RPAREN
+    (57) param_list -> . empty
+    (58) param_list -> . declarator
+    (59) param_list -> . declarator COMMA param_list
+    (61) empty -> .
+    (56) declarator -> . TYPEID ID
 
-    RPAREN          reduce using rule 57 (empty -> .)
-    TYPEID          shift and go to state 16
+    RPAREN          reduce using rule 61 (empty -> .)
+    TYPEID          shift and go to state 25
 
-    param_list                     shift and go to state 25
-    empty                          shift and go to state 27
-    declarator                     shift and go to state 26
+    param_list                     shift and go to state 27
+    empty                          shift and go to state 29
+    declarator                     shift and go to state 28
 
 state 14
 
@@ -284,194 +296,268 @@ state 14
     (8) statement -> . empty
     (9) statement -> . expression_statement statement
     (10) statement -> . if_statement statement
-    (57) empty -> .
+    (61) empty -> .
     (11) expression_statement -> . assignment_statement SEMI
     (12) expression_statement -> . func_call SEMI
     (13) expression_statement -> . declarator SEMI
-    (39) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
-    (14) assignment_statement -> . id EQUALS expression
-    (15) assignment_statement -> . id EQUALS func_call
-    (40) func_call -> . ID LPAREN arg_list RPAREN
-    (53) declarator -> . TYPEID ID
-    (50) id -> . ID
+    (14) expression_statement -> . ret SEMI
+    (42) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
+    (15) assignment_statement -> . id EQUALS expression
+    (16) assignment_statement -> . id EQUALS func_call
+    (43) func_call -> . ID LPAREN arg_list RPAREN
+    (56) declarator -> . TYPEID ID
+    (60) ret -> . RET LPAREN unary_expression RPAREN
+    (53) id -> . ID
 
-    RBRACE          reduce using rule 57 (empty -> .)
-    IF              shift and go to state 24
-    ID              shift and go to state 20
-    TYPEID          shift and go to state 16
+    RBRACE          reduce using rule 61 (empty -> .)
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    TYPEID          shift and go to state 25
+    RET             shift and go to state 15
 
     expression_statement           shift and go to state 14
-    func_call                      shift and go to state 15
+    func_call                      shift and go to state 24
     assignment_statement           shift and go to state 17
-    statement                      shift and go to state 28
-    declarator                     shift and go to state 19
-    if_statement                   shift and go to state 21
-    id                             shift and go to state 22
-    empty                          shift and go to state 23
+    ret                            shift and go to state 18
+    statement                      shift and go to state 30
+    declarator                     shift and go to state 26
+    if_statement                   shift and go to state 20
+    id                             shift and go to state 16
+    empty                          shift and go to state 21
 
 state 15
 
-    (12) expression_statement -> func_call . SEMI
+    (60) ret -> RET . LPAREN unary_expression RPAREN
 
-    SEMI            shift and go to state 29
+    LPAREN          shift and go to state 31
 
 
 state 16
 
-    (53) declarator -> TYPEID . ID
+    (15) assignment_statement -> id . EQUALS expression
+    (16) assignment_statement -> id . EQUALS func_call
 
-    ID              shift and go to state 30
+    EQUALS          shift and go to state 32
 
 
 state 17
 
     (11) expression_statement -> assignment_statement . SEMI
 
-    SEMI            shift and go to state 31
+    SEMI            shift and go to state 33
 
 
 state 18
 
-    (7) function_definition -> func_decl LBRACE statement . RBRACE
+    (14) expression_statement -> ret . SEMI
 
-    RBRACE          shift and go to state 32
+    SEMI            shift and go to state 34
 
 
 state 19
 
-    (13) expression_statement -> declarator . SEMI
+    (7) function_definition -> func_decl LBRACE statement . RBRACE
 
-    SEMI            shift and go to state 33
+    RBRACE          shift and go to state 35
 
 
 state 20
-
-    (40) func_call -> ID . LPAREN arg_list RPAREN
-    (50) id -> ID .
-
-    LPAREN          shift and go to state 34
-    GT              reduce using rule 50 (id -> ID .)
-    LT              reduce using rule 50 (id -> ID .)
-    EQ              reduce using rule 50 (id -> ID .)
-    PLUS            reduce using rule 50 (id -> ID .)
-    MINUS           reduce using rule 50 (id -> ID .)
-    SEMI            reduce using rule 50 (id -> ID .)
-    EQUALS          reduce using rule 50 (id -> ID .)
-
-
-state 21
 
     (10) statement -> if_statement . statement
     (8) statement -> . empty
     (9) statement -> . expression_statement statement
     (10) statement -> . if_statement statement
-    (57) empty -> .
+    (61) empty -> .
     (11) expression_statement -> . assignment_statement SEMI
     (12) expression_statement -> . func_call SEMI
     (13) expression_statement -> . declarator SEMI
-    (39) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
-    (14) assignment_statement -> . id EQUALS expression
-    (15) assignment_statement -> . id EQUALS func_call
-    (40) func_call -> . ID LPAREN arg_list RPAREN
-    (53) declarator -> . TYPEID ID
-    (50) id -> . ID
+    (14) expression_statement -> . ret SEMI
+    (42) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
+    (15) assignment_statement -> . id EQUALS expression
+    (16) assignment_statement -> . id EQUALS func_call
+    (43) func_call -> . ID LPAREN arg_list RPAREN
+    (56) declarator -> . TYPEID ID
+    (60) ret -> . RET LPAREN unary_expression RPAREN
+    (53) id -> . ID
 
-    RBRACE          reduce using rule 57 (empty -> .)
-    IF              shift and go to state 24
-    ID              shift and go to state 20
-    TYPEID          shift and go to state 16
+    RBRACE          reduce using rule 61 (empty -> .)
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    TYPEID          shift and go to state 25
+    RET             shift and go to state 15
 
     expression_statement           shift and go to state 14
-    func_call                      shift and go to state 15
+    func_call                      shift and go to state 24
     assignment_statement           shift and go to state 17
-    statement                      shift and go to state 35
-    declarator                     shift and go to state 19
-    if_statement                   shift and go to state 21
-    id                             shift and go to state 22
-    empty                          shift and go to state 23
+    ret                            shift and go to state 18
+    statement                      shift and go to state 36
+    declarator                     shift and go to state 26
+    if_statement                   shift and go to state 20
+    id                             shift and go to state 16
+    empty                          shift and go to state 21
 
-state 22
-
-    (14) assignment_statement -> id . EQUALS expression
-    (15) assignment_statement -> id . EQUALS func_call
-
-    EQUALS          shift and go to state 36
-
-
-state 23
+state 21
 
     (8) statement -> empty .
 
     RBRACE          reduce using rule 8 (statement -> empty .)
 
 
-state 24
+state 22
 
-    (39) if_statement -> IF . LPAREN cond_expression RPAREN LBRACE statement RBRACE
+    (43) func_call -> ID . LPAREN arg_list RPAREN
+    (53) id -> ID .
 
     LPAREN          shift and go to state 37
+    GT              reduce using rule 53 (id -> ID .)
+    LT              reduce using rule 53 (id -> ID .)
+    EQ              reduce using rule 53 (id -> ID .)
+    PLUS            reduce using rule 53 (id -> ID .)
+    MINUS           reduce using rule 53 (id -> ID .)
+    MULTI           reduce using rule 53 (id -> ID .)
+    DIV             reduce using rule 53 (id -> ID .)
+    SEMI            reduce using rule 53 (id -> ID .)
+    EQUALS          reduce using rule 53 (id -> ID .)
+
+
+state 23
+
+    (42) if_statement -> IF . LPAREN cond_expression RPAREN LBRACE statement RBRACE
+
+    LPAREN          shift and go to state 38
+
+
+state 24
+
+    (12) expression_statement -> func_call . SEMI
+
+    SEMI            shift and go to state 39
 
 
 state 25
 
-    (52) func_decl -> TYPEID ID LPAREN param_list . RPAREN
+    (56) declarator -> TYPEID . ID
 
-    RPAREN          shift and go to state 38
+    ID              shift and go to state 40
 
 
 state 26
 
-    (55) param_list -> declarator .
-    (56) param_list -> declarator . COMMA param_list
+    (13) expression_statement -> declarator . SEMI
 
-    RPAREN          reduce using rule 55 (param_list -> declarator .)
-    COMMA           shift and go to state 39
+    SEMI            shift and go to state 41
 
 
 state 27
 
-    (54) param_list -> empty .
+    (55) func_decl -> TYPEID ID LPAREN param_list . RPAREN
 
-    RPAREN          reduce using rule 54 (param_list -> empty .)
+    RPAREN          shift and go to state 42
 
 
 state 28
+
+    (58) param_list -> declarator .
+    (59) param_list -> declarator . COMMA param_list
+
+    RPAREN          reduce using rule 58 (param_list -> declarator .)
+    COMMA           shift and go to state 43
+
+
+state 29
+
+    (57) param_list -> empty .
+
+    RPAREN          reduce using rule 57 (param_list -> empty .)
+
+
+state 30
 
     (9) statement -> expression_statement statement .
 
     RBRACE          reduce using rule 9 (statement -> expression_statement statement .)
 
 
-state 29
-
-    (12) expression_statement -> func_call SEMI .
-
-    IF              reduce using rule 12 (expression_statement -> func_call SEMI .)
-    ID              reduce using rule 12 (expression_statement -> func_call SEMI .)
-    TYPEID          reduce using rule 12 (expression_statement -> func_call SEMI .)
-    RBRACE          reduce using rule 12 (expression_statement -> func_call SEMI .)
-
-
-state 30
-
-    (53) declarator -> TYPEID ID .
-
-    SEMI            reduce using rule 53 (declarator -> TYPEID ID .)
-    COMMA           reduce using rule 53 (declarator -> TYPEID ID .)
-    RPAREN          reduce using rule 53 (declarator -> TYPEID ID .)
-
-
 state 31
+
+    (60) ret -> RET LPAREN . unary_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 45
+
+state 32
+
+    (15) assignment_statement -> id EQUALS . expression
+    (16) assignment_statement -> id EQUALS . func_call
+    (17) expression -> . unary_expression
+    (18) expression -> . binary_expression
+    (19) expression -> . cond_expression
+    (43) func_call -> . ID LPAREN arg_list RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    ID              shift and go to state 22
+    LPAREN          shift and go to state 52
+    NOT             shift and go to state 53
+    ICONST          shift and go to state 47
+
+    func_call                      shift and go to state 49
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 50
+    unary_expression               shift and go to state 51
+    expression                     shift and go to state 54
+    id                             shift and go to state 48
+    cond_expression                shift and go to state 55
+
+state 33
 
     (11) expression_statement -> assignment_statement SEMI .
 
     IF              reduce using rule 11 (expression_statement -> assignment_statement SEMI .)
     ID              reduce using rule 11 (expression_statement -> assignment_statement SEMI .)
     TYPEID          reduce using rule 11 (expression_statement -> assignment_statement SEMI .)
+    RET             reduce using rule 11 (expression_statement -> assignment_statement SEMI .)
     RBRACE          reduce using rule 11 (expression_statement -> assignment_statement SEMI .)
 
 
-state 32
+state 34
+
+    (14) expression_statement -> ret SEMI .
+
+    IF              reduce using rule 14 (expression_statement -> ret SEMI .)
+    ID              reduce using rule 14 (expression_statement -> ret SEMI .)
+    TYPEID          reduce using rule 14 (expression_statement -> ret SEMI .)
+    RET             reduce using rule 14 (expression_statement -> ret SEMI .)
+    RBRACE          reduce using rule 14 (expression_statement -> ret SEMI .)
+
+
+state 35
 
     (7) function_definition -> func_decl LBRACE statement RBRACE .
 
@@ -479,1323 +565,1437 @@ state 32
     $end            reduce using rule 7 (function_definition -> func_decl LBRACE statement RBRACE .)
 
 
-state 33
-
-    (13) expression_statement -> declarator SEMI .
-
-    IF              reduce using rule 13 (expression_statement -> declarator SEMI .)
-    ID              reduce using rule 13 (expression_statement -> declarator SEMI .)
-    TYPEID          reduce using rule 13 (expression_statement -> declarator SEMI .)
-    RBRACE          reduce using rule 13 (expression_statement -> declarator SEMI .)
-
-
-state 34
-
-    (40) func_call -> ID LPAREN . arg_list RPAREN
-    (41) arg_list -> . empty
-    (42) arg_list -> . id
-    (43) arg_list -> . int_const
-    (44) arg_list -> . str_const
-    (45) arg_list -> . id COMMA arg_list
-    (46) arg_list -> . int_const COMMA arg_list
-    (47) arg_list -> . str_const COMMA arg_list
-    (57) empty -> .
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-    (49) str_const -> . SCONST
-
-    RPAREN          reduce using rule 57 (empty -> .)
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-    SCONST          shift and go to state 42
-
-    str_const                      shift and go to state 41
-    int_const                      shift and go to state 40
-    id                             shift and go to state 45
-    empty                          shift and go to state 46
-    arg_list                       shift and go to state 47
-
-state 35
+state 36
 
     (10) statement -> if_statement statement .
 
     RBRACE          reduce using rule 10 (statement -> if_statement statement .)
 
 
-state 36
-
-    (14) assignment_statement -> id EQUALS . expression
-    (15) assignment_statement -> id EQUALS . func_call
-    (16) expression -> . unary_expression
-    (17) expression -> . binary_expression
-    (18) expression -> . cond_expression
-    (40) func_call -> . ID LPAREN arg_list RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-
-    ID              shift and go to state 20
-    LPAREN          shift and go to state 52
-    NOT             shift and go to state 53
-    ICONST          shift and go to state 44
-
-    func_call                      shift and go to state 48
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 50
-    unary_expression               shift and go to state 51
-    expression                     shift and go to state 54
-    id                             shift and go to state 55
-    cond_expression                shift and go to state 56
-
 state 37
 
-    (39) if_statement -> IF LPAREN . cond_expression RPAREN LBRACE statement RBRACE
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (43) func_call -> ID LPAREN . arg_list RPAREN
+    (44) arg_list -> . empty
+    (45) arg_list -> . id
+    (46) arg_list -> . int_const
+    (47) arg_list -> . str_const
+    (48) arg_list -> . id COMMA arg_list
+    (49) arg_list -> . int_const COMMA arg_list
+    (50) arg_list -> . str_const COMMA arg_list
+    (61) empty -> .
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+    (52) str_const -> . SCONST
 
-    LPAREN          shift and go to state 57
-    NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    RPAREN          reduce using rule 61 (empty -> .)
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+    SCONST          shift and go to state 58
 
-    int_const                      shift and go to state 49
-    unary_expression               shift and go to state 58
-    cond_expression                shift and go to state 59
-    id                             shift and go to state 55
+    str_const                      shift and go to state 57
+    int_const                      shift and go to state 56
+    id                             shift and go to state 59
+    empty                          shift and go to state 60
+    arg_list                       shift and go to state 61
 
 state 38
 
-    (52) func_decl -> TYPEID ID LPAREN param_list RPAREN .
+    (42) if_statement -> IF LPAREN . cond_expression RPAREN LBRACE statement RBRACE
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    SEMI            reduce using rule 52 (func_decl -> TYPEID ID LPAREN param_list RPAREN .)
-    LBRACE          reduce using rule 52 (func_decl -> TYPEID ID LPAREN param_list RPAREN .)
+    LPAREN          shift and go to state 62
+    NOT             shift and go to state 53
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
+    int_const                      shift and go to state 44
+    unary_expression               shift and go to state 63
+    cond_expression                shift and go to state 64
+    id                             shift and go to state 48
 
 state 39
 
-    (56) param_list -> declarator COMMA . param_list
-    (54) param_list -> . empty
-    (55) param_list -> . declarator
-    (56) param_list -> . declarator COMMA param_list
-    (57) empty -> .
-    (53) declarator -> . TYPEID ID
+    (12) expression_statement -> func_call SEMI .
 
-    RPAREN          reduce using rule 57 (empty -> .)
-    TYPEID          shift and go to state 16
+    IF              reduce using rule 12 (expression_statement -> func_call SEMI .)
+    ID              reduce using rule 12 (expression_statement -> func_call SEMI .)
+    TYPEID          reduce using rule 12 (expression_statement -> func_call SEMI .)
+    RET             reduce using rule 12 (expression_statement -> func_call SEMI .)
+    RBRACE          reduce using rule 12 (expression_statement -> func_call SEMI .)
 
-    param_list                     shift and go to state 60
-    empty                          shift and go to state 27
-    declarator                     shift and go to state 26
 
 state 40
 
-    (43) arg_list -> int_const .
-    (46) arg_list -> int_const . COMMA arg_list
+    (56) declarator -> TYPEID ID .
 
-    RPAREN          reduce using rule 43 (arg_list -> int_const .)
-    COMMA           shift and go to state 61
+    SEMI            reduce using rule 56 (declarator -> TYPEID ID .)
+    COMMA           reduce using rule 56 (declarator -> TYPEID ID .)
+    RPAREN          reduce using rule 56 (declarator -> TYPEID ID .)
 
 
 state 41
 
-    (44) arg_list -> str_const .
-    (47) arg_list -> str_const . COMMA arg_list
+    (13) expression_statement -> declarator SEMI .
 
-    RPAREN          reduce using rule 44 (arg_list -> str_const .)
-    COMMA           shift and go to state 62
+    IF              reduce using rule 13 (expression_statement -> declarator SEMI .)
+    ID              reduce using rule 13 (expression_statement -> declarator SEMI .)
+    TYPEID          reduce using rule 13 (expression_statement -> declarator SEMI .)
+    RET             reduce using rule 13 (expression_statement -> declarator SEMI .)
+    RBRACE          reduce using rule 13 (expression_statement -> declarator SEMI .)
 
 
 state 42
 
-    (49) str_const -> SCONST .
+    (55) func_decl -> TYPEID ID LPAREN param_list RPAREN .
 
-    COMMA           reduce using rule 49 (str_const -> SCONST .)
-    RPAREN          reduce using rule 49 (str_const -> SCONST .)
+    SEMI            reduce using rule 55 (func_decl -> TYPEID ID LPAREN param_list RPAREN .)
+    LBRACE          reduce using rule 55 (func_decl -> TYPEID ID LPAREN param_list RPAREN .)
 
 
 state 43
 
-    (50) id -> ID .
+    (59) param_list -> declarator COMMA . param_list
+    (57) param_list -> . empty
+    (58) param_list -> . declarator
+    (59) param_list -> . declarator COMMA param_list
+    (61) empty -> .
+    (56) declarator -> . TYPEID ID
 
-    GT              reduce using rule 50 (id -> ID .)
-    LT              reduce using rule 50 (id -> ID .)
-    EQ              reduce using rule 50 (id -> ID .)
-    PLUS            reduce using rule 50 (id -> ID .)
-    MINUS           reduce using rule 50 (id -> ID .)
-    OR              reduce using rule 50 (id -> ID .)
-    SEMI            reduce using rule 50 (id -> ID .)
-    RPAREN          reduce using rule 50 (id -> ID .)
-    COMMA           reduce using rule 50 (id -> ID .)
+    RPAREN          reduce using rule 61 (empty -> .)
+    TYPEID          shift and go to state 25
 
+    param_list                     shift and go to state 65
+    empty                          shift and go to state 29
+    declarator                     shift and go to state 28
 
 state 44
 
-    (48) int_const -> ICONST .
+    (27) unary_expression -> int_const .
 
-    PLUS            reduce using rule 48 (int_const -> ICONST .)
-    MINUS           reduce using rule 48 (int_const -> ICONST .)
-    SEMI            reduce using rule 48 (int_const -> ICONST .)
-    RPAREN          reduce using rule 48 (int_const -> ICONST .)
-    OR              reduce using rule 48 (int_const -> ICONST .)
-    GT              reduce using rule 48 (int_const -> ICONST .)
-    LT              reduce using rule 48 (int_const -> ICONST .)
-    EQ              reduce using rule 48 (int_const -> ICONST .)
-    COMMA           reduce using rule 48 (int_const -> ICONST .)
+    GT              reduce using rule 27 (unary_expression -> int_const .)
+    LT              reduce using rule 27 (unary_expression -> int_const .)
+    EQ              reduce using rule 27 (unary_expression -> int_const .)
+    PLUS            reduce using rule 27 (unary_expression -> int_const .)
+    MINUS           reduce using rule 27 (unary_expression -> int_const .)
+    MULTI           reduce using rule 27 (unary_expression -> int_const .)
+    DIV             reduce using rule 27 (unary_expression -> int_const .)
+    OR              reduce using rule 27 (unary_expression -> int_const .)
+    SEMI            reduce using rule 27 (unary_expression -> int_const .)
+    RPAREN          reduce using rule 27 (unary_expression -> int_const .)
 
 
 state 45
 
-    (42) arg_list -> id .
-    (45) arg_list -> id . COMMA arg_list
+    (60) ret -> RET LPAREN unary_expression . RPAREN
 
-    RPAREN          reduce using rule 42 (arg_list -> id .)
-    COMMA           shift and go to state 63
+    RPAREN          shift and go to state 66
 
 
 state 46
 
-    (41) arg_list -> empty .
+    (53) id -> ID .
 
-    RPAREN          reduce using rule 41 (arg_list -> empty .)
+    GT              reduce using rule 53 (id -> ID .)
+    LT              reduce using rule 53 (id -> ID .)
+    EQ              reduce using rule 53 (id -> ID .)
+    PLUS            reduce using rule 53 (id -> ID .)
+    MINUS           reduce using rule 53 (id -> ID .)
+    MULTI           reduce using rule 53 (id -> ID .)
+    DIV             reduce using rule 53 (id -> ID .)
+    RPAREN          reduce using rule 53 (id -> ID .)
+    OR              reduce using rule 53 (id -> ID .)
+    COMMA           reduce using rule 53 (id -> ID .)
+    SEMI            reduce using rule 53 (id -> ID .)
 
 
 state 47
 
-    (40) func_call -> ID LPAREN arg_list . RPAREN
+    (51) int_const -> ICONST .
 
-    RPAREN          shift and go to state 64
+    COMMA           reduce using rule 51 (int_const -> ICONST .)
+    RPAREN          reduce using rule 51 (int_const -> ICONST .)
+    GT              reduce using rule 51 (int_const -> ICONST .)
+    LT              reduce using rule 51 (int_const -> ICONST .)
+    EQ              reduce using rule 51 (int_const -> ICONST .)
+    OR              reduce using rule 51 (int_const -> ICONST .)
+    SEMI            reduce using rule 51 (int_const -> ICONST .)
+    PLUS            reduce using rule 51 (int_const -> ICONST .)
+    MINUS           reduce using rule 51 (int_const -> ICONST .)
+    MULTI           reduce using rule 51 (int_const -> ICONST .)
+    DIV             reduce using rule 51 (int_const -> ICONST .)
 
 
 state 48
 
-    (15) assignment_statement -> id EQUALS func_call .
+    (26) unary_expression -> id .
 
-    SEMI            reduce using rule 15 (assignment_statement -> id EQUALS func_call .)
+    GT              reduce using rule 26 (unary_expression -> id .)
+    LT              reduce using rule 26 (unary_expression -> id .)
+    EQ              reduce using rule 26 (unary_expression -> id .)
+    PLUS            reduce using rule 26 (unary_expression -> id .)
+    MINUS           reduce using rule 26 (unary_expression -> id .)
+    MULTI           reduce using rule 26 (unary_expression -> id .)
+    DIV             reduce using rule 26 (unary_expression -> id .)
+    OR              reduce using rule 26 (unary_expression -> id .)
+    SEMI            reduce using rule 26 (unary_expression -> id .)
+    RPAREN          reduce using rule 26 (unary_expression -> id .)
 
 
 state 49
 
-    (26) unary_expression -> int_const .
+    (16) assignment_statement -> id EQUALS func_call .
 
-    GT              reduce using rule 26 (unary_expression -> int_const .)
-    LT              reduce using rule 26 (unary_expression -> int_const .)
-    EQ              reduce using rule 26 (unary_expression -> int_const .)
-    PLUS            reduce using rule 26 (unary_expression -> int_const .)
-    MINUS           reduce using rule 26 (unary_expression -> int_const .)
-    OR              reduce using rule 26 (unary_expression -> int_const .)
-    SEMI            reduce using rule 26 (unary_expression -> int_const .)
-    RPAREN          reduce using rule 26 (unary_expression -> int_const .)
+    SEMI            reduce using rule 16 (assignment_statement -> id EQUALS func_call .)
 
 
 state 50
 
-    (17) expression -> binary_expression .
-    (21) binary_expression -> binary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (18) expression -> binary_expression .
+    (22) binary_expression -> binary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    SEMI            reduce using rule 17 (expression -> binary_expression .)
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    SEMI            reduce using rule 18 (expression -> binary_expression .)
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
-    bin_op                         shift and go to state 65
+    bin_op                         shift and go to state 68
 
 state 51
 
-    (16) expression -> unary_expression .
-    (19) binary_expression -> unary_expression . bin_op unary_expression
-    (20) binary_expression -> unary_expression . bin_op binary_expression
-    (29) cond_expression -> unary_expression . GT unary_expression
-    (30) cond_expression -> unary_expression . LT unary_expression
-    (31) cond_expression -> unary_expression . EQ unary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (17) expression -> unary_expression .
+    (20) binary_expression -> unary_expression . bin_op unary_expression
+    (21) binary_expression -> unary_expression . bin_op binary_expression
+    (32) cond_expression -> unary_expression . GT unary_expression
+    (33) cond_expression -> unary_expression . LT unary_expression
+    (34) cond_expression -> unary_expression . EQ unary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    SEMI            reduce using rule 16 (expression -> unary_expression .)
-    GT              shift and go to state 68
-    LT              shift and go to state 70
-    EQ              shift and go to state 71
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    SEMI            reduce using rule 17 (expression -> unary_expression .)
+    GT              shift and go to state 72
+    LT              shift and go to state 74
+    EQ              shift and go to state 75
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
-    bin_op                         shift and go to state 69
+    bin_op                         shift and go to state 73
 
 state 52
 
-    (22) binary_expression -> LPAREN . unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> LPAREN . unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> LPAREN . binary_expression bin_op binary_expression RPAREN
-    (32) cond_expression -> LPAREN . unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> LPAREN . unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> LPAREN . unary_expression EQ unary_expression RPAREN
-    (37) cond_expression -> LPAREN . cond_expression OR cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (23) binary_expression -> LPAREN . unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> LPAREN . unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> LPAREN . binary_expression bin_op binary_expression RPAREN
+    (35) cond_expression -> LPAREN . unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> LPAREN . unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> LPAREN . unary_expression EQ unary_expression RPAREN
+    (40) cond_expression -> LPAREN . cond_expression OR cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
     LPAREN          shift and go to state 52
     NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 72
-    unary_expression               shift and go to state 73
-    id                             shift and go to state 55
-    cond_expression                shift and go to state 74
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 76
+    unary_expression               shift and go to state 77
+    id                             shift and go to state 48
+    cond_expression                shift and go to state 78
 
 state 53
 
-    (36) cond_expression -> NOT . cond_expression
-    (38) cond_expression -> NOT . LPAREN cond_expression RPAREN
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (39) cond_expression -> NOT . cond_expression
+    (41) cond_expression -> NOT . LPAREN cond_expression RPAREN
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    LPAREN          shift and go to state 75
+    LPAREN          shift and go to state 79
     NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    int_const                      shift and go to state 49
-    unary_expression               shift and go to state 58
-    cond_expression                shift and go to state 76
-    id                             shift and go to state 55
+    int_const                      shift and go to state 44
+    unary_expression               shift and go to state 63
+    cond_expression                shift and go to state 80
+    id                             shift and go to state 48
 
 state 54
 
-    (14) assignment_statement -> id EQUALS expression .
+    (15) assignment_statement -> id EQUALS expression .
 
-    SEMI            reduce using rule 14 (assignment_statement -> id EQUALS expression .)
+    SEMI            reduce using rule 15 (assignment_statement -> id EQUALS expression .)
 
 
 state 55
 
-    (25) unary_expression -> id .
+    (19) expression -> cond_expression .
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-    GT              reduce using rule 25 (unary_expression -> id .)
-    LT              reduce using rule 25 (unary_expression -> id .)
-    EQ              reduce using rule 25 (unary_expression -> id .)
-    PLUS            reduce using rule 25 (unary_expression -> id .)
-    MINUS           reduce using rule 25 (unary_expression -> id .)
-    OR              reduce using rule 25 (unary_expression -> id .)
-    SEMI            reduce using rule 25 (unary_expression -> id .)
-    RPAREN          reduce using rule 25 (unary_expression -> id .)
+    SEMI            reduce using rule 19 (expression -> cond_expression .)
+    OR              shift and go to state 81
 
 
 state 56
 
-    (18) expression -> cond_expression .
-    (35) cond_expression -> cond_expression . OR cond_expression
+    (46) arg_list -> int_const .
+    (49) arg_list -> int_const . COMMA arg_list
 
-    SEMI            reduce using rule 18 (expression -> cond_expression .)
-    OR              shift and go to state 77
+    RPAREN          reduce using rule 46 (arg_list -> int_const .)
+    COMMA           shift and go to state 82
 
 
 state 57
 
-    (32) cond_expression -> LPAREN . unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> LPAREN . unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> LPAREN . unary_expression EQ unary_expression RPAREN
-    (37) cond_expression -> LPAREN . cond_expression OR cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (47) arg_list -> str_const .
+    (50) arg_list -> str_const . COMMA arg_list
 
-    LPAREN          shift and go to state 57
-    NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    RPAREN          reduce using rule 47 (arg_list -> str_const .)
+    COMMA           shift and go to state 83
 
-    int_const                      shift and go to state 49
-    cond_expression                shift and go to state 74
-    unary_expression               shift and go to state 78
-    id                             shift and go to state 55
 
 state 58
 
-    (29) cond_expression -> unary_expression . GT unary_expression
-    (30) cond_expression -> unary_expression . LT unary_expression
-    (31) cond_expression -> unary_expression . EQ unary_expression
+    (52) str_const -> SCONST .
 
-    GT              shift and go to state 68
-    LT              shift and go to state 70
-    EQ              shift and go to state 71
+    COMMA           reduce using rule 52 (str_const -> SCONST .)
+    RPAREN          reduce using rule 52 (str_const -> SCONST .)
 
 
 state 59
 
-    (39) if_statement -> IF LPAREN cond_expression . RPAREN LBRACE statement RBRACE
-    (35) cond_expression -> cond_expression . OR cond_expression
+    (45) arg_list -> id .
+    (48) arg_list -> id . COMMA arg_list
 
-    RPAREN          shift and go to state 79
-    OR              shift and go to state 77
+    RPAREN          reduce using rule 45 (arg_list -> id .)
+    COMMA           shift and go to state 84
 
 
 state 60
 
-    (56) param_list -> declarator COMMA param_list .
+    (44) arg_list -> empty .
 
-    RPAREN          reduce using rule 56 (param_list -> declarator COMMA param_list .)
+    RPAREN          reduce using rule 44 (arg_list -> empty .)
 
 
 state 61
 
-    (46) arg_list -> int_const COMMA . arg_list
-    (41) arg_list -> . empty
-    (42) arg_list -> . id
-    (43) arg_list -> . int_const
-    (44) arg_list -> . str_const
-    (45) arg_list -> . id COMMA arg_list
-    (46) arg_list -> . int_const COMMA arg_list
-    (47) arg_list -> . str_const COMMA arg_list
-    (57) empty -> .
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-    (49) str_const -> . SCONST
+    (43) func_call -> ID LPAREN arg_list . RPAREN
 
-    RPAREN          reduce using rule 57 (empty -> .)
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-    SCONST          shift and go to state 42
+    RPAREN          shift and go to state 85
 
-    str_const                      shift and go to state 41
-    int_const                      shift and go to state 40
-    id                             shift and go to state 45
-    empty                          shift and go to state 46
-    arg_list                       shift and go to state 80
 
 state 62
 
-    (47) arg_list -> str_const COMMA . arg_list
-    (41) arg_list -> . empty
-    (42) arg_list -> . id
-    (43) arg_list -> . int_const
-    (44) arg_list -> . str_const
-    (45) arg_list -> . id COMMA arg_list
-    (46) arg_list -> . int_const COMMA arg_list
-    (47) arg_list -> . str_const COMMA arg_list
-    (57) empty -> .
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-    (49) str_const -> . SCONST
+    (35) cond_expression -> LPAREN . unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> LPAREN . unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> LPAREN . unary_expression EQ unary_expression RPAREN
+    (40) cond_expression -> LPAREN . cond_expression OR cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    RPAREN          reduce using rule 57 (empty -> .)
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-    SCONST          shift and go to state 42
+    LPAREN          shift and go to state 62
+    NOT             shift and go to state 53
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    str_const                      shift and go to state 41
-    int_const                      shift and go to state 40
-    id                             shift and go to state 45
-    empty                          shift and go to state 46
-    arg_list                       shift and go to state 81
+    int_const                      shift and go to state 44
+    cond_expression                shift and go to state 78
+    unary_expression               shift and go to state 86
+    id                             shift and go to state 48
 
 state 63
 
-    (45) arg_list -> id COMMA . arg_list
-    (41) arg_list -> . empty
-    (42) arg_list -> . id
-    (43) arg_list -> . int_const
-    (44) arg_list -> . str_const
-    (45) arg_list -> . id COMMA arg_list
-    (46) arg_list -> . int_const COMMA arg_list
-    (47) arg_list -> . str_const COMMA arg_list
-    (57) empty -> .
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-    (49) str_const -> . SCONST
+    (32) cond_expression -> unary_expression . GT unary_expression
+    (33) cond_expression -> unary_expression . LT unary_expression
+    (34) cond_expression -> unary_expression . EQ unary_expression
 
-    RPAREN          reduce using rule 57 (empty -> .)
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-    SCONST          shift and go to state 42
+    GT              shift and go to state 72
+    LT              shift and go to state 74
+    EQ              shift and go to state 75
 
-    str_const                      shift and go to state 41
-    int_const                      shift and go to state 40
-    id                             shift and go to state 45
-    empty                          shift and go to state 46
-    arg_list                       shift and go to state 82
 
 state 64
 
-    (40) func_call -> ID LPAREN arg_list RPAREN .
+    (42) if_statement -> IF LPAREN cond_expression . RPAREN LBRACE statement RBRACE
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-    SEMI            reduce using rule 40 (func_call -> ID LPAREN arg_list RPAREN .)
+    RPAREN          shift and go to state 87
+    OR              shift and go to state 81
 
 
 state 65
 
-    (21) binary_expression -> binary_expression bin_op . binary_expression
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (59) param_list -> declarator COMMA param_list .
 
-    LPAREN          shift and go to state 85
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    RPAREN          reduce using rule 59 (param_list -> declarator COMMA param_list .)
 
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 83
-    unary_expression               shift and go to state 84
-    id                             shift and go to state 55
 
 state 66
 
-    (27) bin_op -> PLUS .
+    (60) ret -> RET LPAREN unary_expression RPAREN .
 
-    LPAREN          reduce using rule 27 (bin_op -> PLUS .)
-    ID              reduce using rule 27 (bin_op -> PLUS .)
-    ICONST          reduce using rule 27 (bin_op -> PLUS .)
+    SEMI            reduce using rule 60 (ret -> RET LPAREN unary_expression RPAREN .)
 
 
 state 67
 
-    (28) bin_op -> MINUS .
+    (30) bin_op -> MULTI .
 
-    LPAREN          reduce using rule 28 (bin_op -> MINUS .)
-    ID              reduce using rule 28 (bin_op -> MINUS .)
-    ICONST          reduce using rule 28 (bin_op -> MINUS .)
+    LPAREN          reduce using rule 30 (bin_op -> MULTI .)
+    ID              reduce using rule 30 (bin_op -> MULTI .)
+    ICONST          reduce using rule 30 (bin_op -> MULTI .)
 
 
 state 68
 
-    (29) cond_expression -> unary_expression GT . unary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (22) binary_expression -> binary_expression bin_op . binary_expression
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    LPAREN          shift and go to state 90
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    int_const                      shift and go to state 49
-    id                             shift and go to state 55
-    unary_expression               shift and go to state 86
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 88
+    unary_expression               shift and go to state 89
+    id                             shift and go to state 48
 
 state 69
 
-    (19) binary_expression -> unary_expression bin_op . unary_expression
-    (20) binary_expression -> unary_expression bin_op . binary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (28) bin_op -> PLUS .
 
-    LPAREN          shift and go to state 85
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    LPAREN          reduce using rule 28 (bin_op -> PLUS .)
+    ID              reduce using rule 28 (bin_op -> PLUS .)
+    ICONST          reduce using rule 28 (bin_op -> PLUS .)
 
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 87
-    unary_expression               shift and go to state 88
-    id                             shift and go to state 55
 
 state 70
 
-    (30) cond_expression -> unary_expression LT . unary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (31) bin_op -> DIV .
 
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    LPAREN          reduce using rule 31 (bin_op -> DIV .)
+    ID              reduce using rule 31 (bin_op -> DIV .)
+    ICONST          reduce using rule 31 (bin_op -> DIV .)
 
-    int_const                      shift and go to state 49
-    id                             shift and go to state 55
-    unary_expression               shift and go to state 89
 
 state 71
 
-    (31) cond_expression -> unary_expression EQ . unary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (29) bin_op -> MINUS .
 
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    LPAREN          reduce using rule 29 (bin_op -> MINUS .)
+    ID              reduce using rule 29 (bin_op -> MINUS .)
+    ICONST          reduce using rule 29 (bin_op -> MINUS .)
 
-    int_const                      shift and go to state 49
-    id                             shift and go to state 55
-    unary_expression               shift and go to state 90
 
 state 72
 
-    (24) binary_expression -> LPAREN binary_expression . bin_op binary_expression RPAREN
-    (21) binary_expression -> binary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (32) cond_expression -> unary_expression GT . unary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    bin_op                         shift and go to state 91
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 91
 
 state 73
 
-    (22) binary_expression -> LPAREN unary_expression . bin_op unary_expression RPAREN
-    (23) binary_expression -> LPAREN unary_expression . bin_op binary_expression RPAREN
-    (32) cond_expression -> LPAREN unary_expression . GT unary_expression RPAREN
-    (33) cond_expression -> LPAREN unary_expression . LT unary_expression RPAREN
-    (34) cond_expression -> LPAREN unary_expression . EQ unary_expression RPAREN
-    (19) binary_expression -> unary_expression . bin_op unary_expression
-    (20) binary_expression -> unary_expression . bin_op binary_expression
-    (29) cond_expression -> unary_expression . GT unary_expression
-    (30) cond_expression -> unary_expression . LT unary_expression
-    (31) cond_expression -> unary_expression . EQ unary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (20) binary_expression -> unary_expression bin_op . unary_expression
+    (21) binary_expression -> unary_expression bin_op . binary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    GT              shift and go to state 92
-    LT              shift and go to state 94
-    EQ              shift and go to state 95
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    LPAREN          shift and go to state 90
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    bin_op                         shift and go to state 93
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 92
+    unary_expression               shift and go to state 93
+    id                             shift and go to state 48
 
 state 74
 
-    (37) cond_expression -> LPAREN cond_expression . OR cond_expression RPAREN
-    (35) cond_expression -> cond_expression . OR cond_expression
+    (33) cond_expression -> unary_expression LT . unary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    OR              shift and go to state 96
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 94
 
 state 75
 
-    (38) cond_expression -> NOT LPAREN . cond_expression RPAREN
-    (32) cond_expression -> LPAREN . unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> LPAREN . unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> LPAREN . unary_expression EQ unary_expression RPAREN
-    (37) cond_expression -> LPAREN . cond_expression OR cond_expression RPAREN
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (34) cond_expression -> unary_expression EQ . unary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    LPAREN          shift and go to state 57
-    NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
-    int_const                      shift and go to state 49
-    unary_expression               shift and go to state 78
-    cond_expression                shift and go to state 97
-    id                             shift and go to state 55
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 95
 
 state 76
 
-    (36) cond_expression -> NOT cond_expression .
-    (35) cond_expression -> cond_expression . OR cond_expression
+    (25) binary_expression -> LPAREN binary_expression . bin_op binary_expression RPAREN
+    (22) binary_expression -> binary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-  ! shift/reduce conflict for OR resolved as shift
-    SEMI            reduce using rule 36 (cond_expression -> NOT cond_expression .)
-    RPAREN          reduce using rule 36 (cond_expression -> NOT cond_expression .)
-    OR              shift and go to state 77
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
-  ! OR              [ reduce using rule 36 (cond_expression -> NOT cond_expression .) ]
-
+    bin_op                         shift and go to state 96
 
 state 77
 
-    (35) cond_expression -> cond_expression OR . cond_expression
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (23) binary_expression -> LPAREN unary_expression . bin_op unary_expression RPAREN
+    (24) binary_expression -> LPAREN unary_expression . bin_op binary_expression RPAREN
+    (35) cond_expression -> LPAREN unary_expression . GT unary_expression RPAREN
+    (36) cond_expression -> LPAREN unary_expression . LT unary_expression RPAREN
+    (37) cond_expression -> LPAREN unary_expression . EQ unary_expression RPAREN
+    (20) binary_expression -> unary_expression . bin_op unary_expression
+    (21) binary_expression -> unary_expression . bin_op binary_expression
+    (32) cond_expression -> unary_expression . GT unary_expression
+    (33) cond_expression -> unary_expression . LT unary_expression
+    (34) cond_expression -> unary_expression . EQ unary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    LPAREN          shift and go to state 57
-    NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    GT              shift and go to state 97
+    LT              shift and go to state 99
+    EQ              shift and go to state 100
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
-    int_const                      shift and go to state 49
-    unary_expression               shift and go to state 58
-    cond_expression                shift and go to state 98
-    id                             shift and go to state 55
+    bin_op                         shift and go to state 98
 
 state 78
 
-    (32) cond_expression -> LPAREN unary_expression . GT unary_expression RPAREN
-    (33) cond_expression -> LPAREN unary_expression . LT unary_expression RPAREN
-    (34) cond_expression -> LPAREN unary_expression . EQ unary_expression RPAREN
-    (29) cond_expression -> unary_expression . GT unary_expression
-    (30) cond_expression -> unary_expression . LT unary_expression
-    (31) cond_expression -> unary_expression . EQ unary_expression
+    (40) cond_expression -> LPAREN cond_expression . OR cond_expression RPAREN
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-    GT              shift and go to state 92
-    LT              shift and go to state 94
-    EQ              shift and go to state 95
+    OR              shift and go to state 101
 
 
 state 79
 
-    (39) if_statement -> IF LPAREN cond_expression RPAREN . LBRACE statement RBRACE
+    (41) cond_expression -> NOT LPAREN . cond_expression RPAREN
+    (35) cond_expression -> LPAREN . unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> LPAREN . unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> LPAREN . unary_expression EQ unary_expression RPAREN
+    (40) cond_expression -> LPAREN . cond_expression OR cond_expression RPAREN
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    LBRACE          shift and go to state 99
+    LPAREN          shift and go to state 62
+    NOT             shift and go to state 53
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
+    int_const                      shift and go to state 44
+    unary_expression               shift and go to state 86
+    cond_expression                shift and go to state 102
+    id                             shift and go to state 48
 
 state 80
 
-    (46) arg_list -> int_const COMMA arg_list .
+    (39) cond_expression -> NOT cond_expression .
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-    RPAREN          reduce using rule 46 (arg_list -> int_const COMMA arg_list .)
+  ! shift/reduce conflict for OR resolved as shift
+    SEMI            reduce using rule 39 (cond_expression -> NOT cond_expression .)
+    RPAREN          reduce using rule 39 (cond_expression -> NOT cond_expression .)
+    OR              shift and go to state 81
+
+  ! OR              [ reduce using rule 39 (cond_expression -> NOT cond_expression .) ]
 
 
 state 81
 
-    (47) arg_list -> str_const COMMA arg_list .
+    (38) cond_expression -> cond_expression OR . cond_expression
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    RPAREN          reduce using rule 47 (arg_list -> str_const COMMA arg_list .)
+    LPAREN          shift and go to state 62
+    NOT             shift and go to state 53
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
+    int_const                      shift and go to state 44
+    unary_expression               shift and go to state 63
+    cond_expression                shift and go to state 103
+    id                             shift and go to state 48
 
 state 82
 
-    (45) arg_list -> id COMMA arg_list .
+    (49) arg_list -> int_const COMMA . arg_list
+    (44) arg_list -> . empty
+    (45) arg_list -> . id
+    (46) arg_list -> . int_const
+    (47) arg_list -> . str_const
+    (48) arg_list -> . id COMMA arg_list
+    (49) arg_list -> . int_const COMMA arg_list
+    (50) arg_list -> . str_const COMMA arg_list
+    (61) empty -> .
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+    (52) str_const -> . SCONST
 
-    RPAREN          reduce using rule 45 (arg_list -> id COMMA arg_list .)
+    RPAREN          reduce using rule 61 (empty -> .)
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+    SCONST          shift and go to state 58
 
+    str_const                      shift and go to state 57
+    int_const                      shift and go to state 56
+    id                             shift and go to state 59
+    empty                          shift and go to state 60
+    arg_list                       shift and go to state 104
 
 state 83
 
-    (21) binary_expression -> binary_expression bin_op binary_expression .
-    (21) binary_expression -> binary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (50) arg_list -> str_const COMMA . arg_list
+    (44) arg_list -> . empty
+    (45) arg_list -> . id
+    (46) arg_list -> . int_const
+    (47) arg_list -> . str_const
+    (48) arg_list -> . id COMMA arg_list
+    (49) arg_list -> . int_const COMMA arg_list
+    (50) arg_list -> . str_const COMMA arg_list
+    (61) empty -> .
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+    (52) str_const -> . SCONST
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-    SEMI            reduce using rule 21 (binary_expression -> binary_expression bin_op binary_expression .)
-    RPAREN          reduce using rule 21 (binary_expression -> binary_expression bin_op binary_expression .)
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    RPAREN          reduce using rule 61 (empty -> .)
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+    SCONST          shift and go to state 58
 
-  ! PLUS            [ reduce using rule 21 (binary_expression -> binary_expression bin_op binary_expression .) ]
-  ! MINUS           [ reduce using rule 21 (binary_expression -> binary_expression bin_op binary_expression .) ]
-
-    bin_op                         shift and go to state 65
+    str_const                      shift and go to state 57
+    int_const                      shift and go to state 56
+    id                             shift and go to state 59
+    empty                          shift and go to state 60
+    arg_list                       shift and go to state 105
 
 state 84
 
-    (19) binary_expression -> unary_expression . bin_op unary_expression
-    (20) binary_expression -> unary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (48) arg_list -> id COMMA . arg_list
+    (44) arg_list -> . empty
+    (45) arg_list -> . id
+    (46) arg_list -> . int_const
+    (47) arg_list -> . str_const
+    (48) arg_list -> . id COMMA arg_list
+    (49) arg_list -> . int_const COMMA arg_list
+    (50) arg_list -> . str_const COMMA arg_list
+    (61) empty -> .
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+    (52) str_const -> . SCONST
 
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    RPAREN          reduce using rule 61 (empty -> .)
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+    SCONST          shift and go to state 58
 
-    bin_op                         shift and go to state 69
+    str_const                      shift and go to state 57
+    int_const                      shift and go to state 56
+    id                             shift and go to state 59
+    empty                          shift and go to state 60
+    arg_list                       shift and go to state 106
 
 state 85
 
-    (22) binary_expression -> LPAREN . unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> LPAREN . unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> LPAREN . binary_expression bin_op binary_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (43) func_call -> ID LPAREN arg_list RPAREN .
 
-    LPAREN          shift and go to state 85
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    SEMI            reduce using rule 43 (func_call -> ID LPAREN arg_list RPAREN .)
 
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 72
-    unary_expression               shift and go to state 100
-    id                             shift and go to state 55
 
 state 86
 
-    (29) cond_expression -> unary_expression GT unary_expression .
+    (35) cond_expression -> LPAREN unary_expression . GT unary_expression RPAREN
+    (36) cond_expression -> LPAREN unary_expression . LT unary_expression RPAREN
+    (37) cond_expression -> LPAREN unary_expression . EQ unary_expression RPAREN
+    (32) cond_expression -> unary_expression . GT unary_expression
+    (33) cond_expression -> unary_expression . LT unary_expression
+    (34) cond_expression -> unary_expression . EQ unary_expression
 
-    OR              reduce using rule 29 (cond_expression -> unary_expression GT unary_expression .)
-    SEMI            reduce using rule 29 (cond_expression -> unary_expression GT unary_expression .)
-    RPAREN          reduce using rule 29 (cond_expression -> unary_expression GT unary_expression .)
+    GT              shift and go to state 97
+    LT              shift and go to state 99
+    EQ              shift and go to state 100
 
 
 state 87
 
-    (20) binary_expression -> unary_expression bin_op binary_expression .
-    (21) binary_expression -> binary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (42) if_statement -> IF LPAREN cond_expression RPAREN . LBRACE statement RBRACE
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-    SEMI            reduce using rule 20 (binary_expression -> unary_expression bin_op binary_expression .)
-    RPAREN          reduce using rule 20 (binary_expression -> unary_expression bin_op binary_expression .)
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    LBRACE          shift and go to state 107
 
-  ! PLUS            [ reduce using rule 20 (binary_expression -> unary_expression bin_op binary_expression .) ]
-  ! MINUS           [ reduce using rule 20 (binary_expression -> unary_expression bin_op binary_expression .) ]
-
-    bin_op                         shift and go to state 65
 
 state 88
 
-    (19) binary_expression -> unary_expression bin_op unary_expression .
-    (19) binary_expression -> unary_expression . bin_op unary_expression
-    (20) binary_expression -> unary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (22) binary_expression -> binary_expression bin_op binary_expression .
+    (22) binary_expression -> binary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
-    SEMI            reduce using rule 19 (binary_expression -> unary_expression bin_op unary_expression .)
-    RPAREN          reduce using rule 19 (binary_expression -> unary_expression bin_op unary_expression .)
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    RPAREN          reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .)
+    SEMI            reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .)
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
-  ! PLUS            [ reduce using rule 19 (binary_expression -> unary_expression bin_op unary_expression .) ]
-  ! MINUS           [ reduce using rule 19 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! PLUS            [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! MINUS           [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! MULTI           [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! DIV             [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
 
-    bin_op                         shift and go to state 69
+    bin_op                         shift and go to state 68
 
 state 89
 
-    (30) cond_expression -> unary_expression LT unary_expression .
+    (20) binary_expression -> unary_expression . bin_op unary_expression
+    (21) binary_expression -> unary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    OR              reduce using rule 30 (cond_expression -> unary_expression LT unary_expression .)
-    SEMI            reduce using rule 30 (cond_expression -> unary_expression LT unary_expression .)
-    RPAREN          reduce using rule 30 (cond_expression -> unary_expression LT unary_expression .)
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
+    bin_op                         shift and go to state 73
 
 state 90
 
-    (31) cond_expression -> unary_expression EQ unary_expression .
+    (23) binary_expression -> LPAREN . unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> LPAREN . unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> LPAREN . binary_expression bin_op binary_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (53) id -> . ID
+    (51) int_const -> . ICONST
 
-    OR              reduce using rule 31 (cond_expression -> unary_expression EQ unary_expression .)
-    SEMI            reduce using rule 31 (cond_expression -> unary_expression EQ unary_expression .)
-    RPAREN          reduce using rule 31 (cond_expression -> unary_expression EQ unary_expression .)
+    LPAREN          shift and go to state 90
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
 
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 76
+    unary_expression               shift and go to state 108
+    id                             shift and go to state 48
 
 state 91
 
-    (24) binary_expression -> LPAREN binary_expression bin_op . binary_expression RPAREN
-    (21) binary_expression -> binary_expression bin_op . binary_expression
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
+    (32) cond_expression -> unary_expression GT unary_expression .
 
-    LPAREN          shift and go to state 85
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
+    OR              reduce using rule 32 (cond_expression -> unary_expression GT unary_expression .)
+    SEMI            reduce using rule 32 (cond_expression -> unary_expression GT unary_expression .)
+    RPAREN          reduce using rule 32 (cond_expression -> unary_expression GT unary_expression .)
 
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 101
-    unary_expression               shift and go to state 84
-    id                             shift and go to state 55
 
 state 92
 
-    (32) cond_expression -> LPAREN unary_expression GT . unary_expression RPAREN
-    (29) cond_expression -> unary_expression GT . unary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-
-    int_const                      shift and go to state 49
-    id                             shift and go to state 55
-    unary_expression               shift and go to state 102
-
-state 93
-
-    (22) binary_expression -> LPAREN unary_expression bin_op . unary_expression RPAREN
-    (23) binary_expression -> LPAREN unary_expression bin_op . binary_expression RPAREN
-    (19) binary_expression -> unary_expression bin_op . unary_expression
-    (20) binary_expression -> unary_expression bin_op . binary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (19) binary_expression -> . unary_expression bin_op unary_expression
-    (20) binary_expression -> . unary_expression bin_op binary_expression
-    (21) binary_expression -> . binary_expression bin_op binary_expression
-    (22) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
-    (23) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
-    (24) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-
-    LPAREN          shift and go to state 85
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-
-    int_const                      shift and go to state 49
-    binary_expression              shift and go to state 103
-    unary_expression               shift and go to state 104
-    id                             shift and go to state 55
-
-state 94
-
-    (33) cond_expression -> LPAREN unary_expression LT . unary_expression RPAREN
-    (30) cond_expression -> unary_expression LT . unary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-
-    int_const                      shift and go to state 49
-    id                             shift and go to state 55
-    unary_expression               shift and go to state 105
-
-state 95
-
-    (34) cond_expression -> LPAREN unary_expression EQ . unary_expression RPAREN
-    (31) cond_expression -> unary_expression EQ . unary_expression
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-
-    int_const                      shift and go to state 49
-    id                             shift and go to state 55
-    unary_expression               shift and go to state 106
-
-state 96
-
-    (37) cond_expression -> LPAREN cond_expression OR . cond_expression RPAREN
-    (35) cond_expression -> cond_expression OR . cond_expression
-    (29) cond_expression -> . unary_expression GT unary_expression
-    (30) cond_expression -> . unary_expression LT unary_expression
-    (31) cond_expression -> . unary_expression EQ unary_expression
-    (32) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
-    (33) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
-    (34) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
-    (35) cond_expression -> . cond_expression OR cond_expression
-    (36) cond_expression -> . NOT cond_expression
-    (37) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
-    (38) cond_expression -> . NOT LPAREN cond_expression RPAREN
-    (25) unary_expression -> . id
-    (26) unary_expression -> . int_const
-    (50) id -> . ID
-    (48) int_const -> . ICONST
-
-    LPAREN          shift and go to state 57
-    NOT             shift and go to state 53
-    ID              shift and go to state 43
-    ICONST          shift and go to state 44
-
-    int_const                      shift and go to state 49
-    unary_expression               shift and go to state 58
-    cond_expression                shift and go to state 107
-    id                             shift and go to state 55
-
-state 97
-
-    (38) cond_expression -> NOT LPAREN cond_expression . RPAREN
-    (37) cond_expression -> LPAREN cond_expression . OR cond_expression RPAREN
-    (35) cond_expression -> cond_expression . OR cond_expression
-
-    RPAREN          shift and go to state 108
-    OR              shift and go to state 96
-
-
-state 98
-
-    (35) cond_expression -> cond_expression OR cond_expression .
-    (35) cond_expression -> cond_expression . OR cond_expression
-
-  ! shift/reduce conflict for OR resolved as shift
-    SEMI            reduce using rule 35 (cond_expression -> cond_expression OR cond_expression .)
-    RPAREN          reduce using rule 35 (cond_expression -> cond_expression OR cond_expression .)
-    OR              shift and go to state 77
-
-  ! OR              [ reduce using rule 35 (cond_expression -> cond_expression OR cond_expression .) ]
-
-
-state 99
-
-    (39) if_statement -> IF LPAREN cond_expression RPAREN LBRACE . statement RBRACE
-    (8) statement -> . empty
-    (9) statement -> . expression_statement statement
-    (10) statement -> . if_statement statement
-    (57) empty -> .
-    (11) expression_statement -> . assignment_statement SEMI
-    (12) expression_statement -> . func_call SEMI
-    (13) expression_statement -> . declarator SEMI
-    (39) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
-    (14) assignment_statement -> . id EQUALS expression
-    (15) assignment_statement -> . id EQUALS func_call
-    (40) func_call -> . ID LPAREN arg_list RPAREN
-    (53) declarator -> . TYPEID ID
-    (50) id -> . ID
-
-    RBRACE          reduce using rule 57 (empty -> .)
-    IF              shift and go to state 24
-    ID              shift and go to state 20
-    TYPEID          shift and go to state 16
-
-    expression_statement           shift and go to state 14
-    func_call                      shift and go to state 15
-    assignment_statement           shift and go to state 17
-    statement                      shift and go to state 109
-    declarator                     shift and go to state 19
-    if_statement                   shift and go to state 21
-    id                             shift and go to state 22
-    empty                          shift and go to state 23
-
-state 100
-
-    (22) binary_expression -> LPAREN unary_expression . bin_op unary_expression RPAREN
-    (23) binary_expression -> LPAREN unary_expression . bin_op binary_expression RPAREN
-    (19) binary_expression -> unary_expression . bin_op unary_expression
-    (20) binary_expression -> unary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
-
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
-
-    bin_op                         shift and go to state 93
-
-state 101
-
-    (24) binary_expression -> LPAREN binary_expression bin_op binary_expression . RPAREN
-    (21) binary_expression -> binary_expression bin_op binary_expression .
-    (21) binary_expression -> binary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (21) binary_expression -> unary_expression bin_op binary_expression .
+    (22) binary_expression -> binary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
-    RPAREN          shift and go to state 110
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    RPAREN          reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .)
+    SEMI            reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .)
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
-  ! PLUS            [ reduce using rule 21 (binary_expression -> binary_expression bin_op binary_expression .) ]
-  ! MINUS           [ reduce using rule 21 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! PLUS            [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! MINUS           [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! MULTI           [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! DIV             [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
 
-    bin_op                         shift and go to state 65
+    bin_op                         shift and go to state 68
+
+state 93
+
+    (20) binary_expression -> unary_expression bin_op unary_expression .
+    (20) binary_expression -> unary_expression . bin_op unary_expression
+    (21) binary_expression -> unary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    RPAREN          reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .)
+    SEMI            reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .)
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
+
+  ! PLUS            [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! MINUS           [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! MULTI           [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! DIV             [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+
+    bin_op                         shift and go to state 73
+
+state 94
+
+    (33) cond_expression -> unary_expression LT unary_expression .
+
+    OR              reduce using rule 33 (cond_expression -> unary_expression LT unary_expression .)
+    SEMI            reduce using rule 33 (cond_expression -> unary_expression LT unary_expression .)
+    RPAREN          reduce using rule 33 (cond_expression -> unary_expression LT unary_expression .)
+
+
+state 95
+
+    (34) cond_expression -> unary_expression EQ unary_expression .
+
+    OR              reduce using rule 34 (cond_expression -> unary_expression EQ unary_expression .)
+    SEMI            reduce using rule 34 (cond_expression -> unary_expression EQ unary_expression .)
+    RPAREN          reduce using rule 34 (cond_expression -> unary_expression EQ unary_expression .)
+
+
+state 96
+
+    (25) binary_expression -> LPAREN binary_expression bin_op . binary_expression RPAREN
+    (22) binary_expression -> binary_expression bin_op . binary_expression
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    LPAREN          shift and go to state 90
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 109
+    unary_expression               shift and go to state 89
+    id                             shift and go to state 48
+
+state 97
+
+    (35) cond_expression -> LPAREN unary_expression GT . unary_expression RPAREN
+    (32) cond_expression -> unary_expression GT . unary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 110
+
+state 98
+
+    (23) binary_expression -> LPAREN unary_expression bin_op . unary_expression RPAREN
+    (24) binary_expression -> LPAREN unary_expression bin_op . binary_expression RPAREN
+    (20) binary_expression -> unary_expression bin_op . unary_expression
+    (21) binary_expression -> unary_expression bin_op . binary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (20) binary_expression -> . unary_expression bin_op unary_expression
+    (21) binary_expression -> . unary_expression bin_op binary_expression
+    (22) binary_expression -> . binary_expression bin_op binary_expression
+    (23) binary_expression -> . LPAREN unary_expression bin_op unary_expression RPAREN
+    (24) binary_expression -> . LPAREN unary_expression bin_op binary_expression RPAREN
+    (25) binary_expression -> . LPAREN binary_expression bin_op binary_expression RPAREN
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    LPAREN          shift and go to state 90
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    binary_expression              shift and go to state 111
+    unary_expression               shift and go to state 112
+    id                             shift and go to state 48
+
+state 99
+
+    (36) cond_expression -> LPAREN unary_expression LT . unary_expression RPAREN
+    (33) cond_expression -> unary_expression LT . unary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 113
+
+state 100
+
+    (37) cond_expression -> LPAREN unary_expression EQ . unary_expression RPAREN
+    (34) cond_expression -> unary_expression EQ . unary_expression
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    id                             shift and go to state 48
+    unary_expression               shift and go to state 114
+
+state 101
+
+    (40) cond_expression -> LPAREN cond_expression OR . cond_expression RPAREN
+    (38) cond_expression -> cond_expression OR . cond_expression
+    (32) cond_expression -> . unary_expression GT unary_expression
+    (33) cond_expression -> . unary_expression LT unary_expression
+    (34) cond_expression -> . unary_expression EQ unary_expression
+    (35) cond_expression -> . LPAREN unary_expression GT unary_expression RPAREN
+    (36) cond_expression -> . LPAREN unary_expression LT unary_expression RPAREN
+    (37) cond_expression -> . LPAREN unary_expression EQ unary_expression RPAREN
+    (38) cond_expression -> . cond_expression OR cond_expression
+    (39) cond_expression -> . NOT cond_expression
+    (40) cond_expression -> . LPAREN cond_expression OR cond_expression RPAREN
+    (41) cond_expression -> . NOT LPAREN cond_expression RPAREN
+    (26) unary_expression -> . id
+    (27) unary_expression -> . int_const
+    (53) id -> . ID
+    (51) int_const -> . ICONST
+
+    LPAREN          shift and go to state 62
+    NOT             shift and go to state 53
+    ID              shift and go to state 46
+    ICONST          shift and go to state 47
+
+    int_const                      shift and go to state 44
+    unary_expression               shift and go to state 63
+    cond_expression                shift and go to state 115
+    id                             shift and go to state 48
 
 state 102
 
-    (32) cond_expression -> LPAREN unary_expression GT unary_expression . RPAREN
-    (29) cond_expression -> unary_expression GT unary_expression .
+    (41) cond_expression -> NOT LPAREN cond_expression . RPAREN
+    (40) cond_expression -> LPAREN cond_expression . OR cond_expression RPAREN
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-  ! shift/reduce conflict for RPAREN resolved as shift
-    RPAREN          shift and go to state 111
-    OR              reduce using rule 29 (cond_expression -> unary_expression GT unary_expression .)
-
-  ! RPAREN          [ reduce using rule 29 (cond_expression -> unary_expression GT unary_expression .) ]
+    RPAREN          shift and go to state 116
+    OR              shift and go to state 101
 
 
 state 103
 
-    (23) binary_expression -> LPAREN unary_expression bin_op binary_expression . RPAREN
-    (20) binary_expression -> unary_expression bin_op binary_expression .
-    (21) binary_expression -> binary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (38) cond_expression -> cond_expression OR cond_expression .
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-    RPAREN          shift and go to state 112
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+  ! shift/reduce conflict for OR resolved as shift
+    SEMI            reduce using rule 38 (cond_expression -> cond_expression OR cond_expression .)
+    RPAREN          reduce using rule 38 (cond_expression -> cond_expression OR cond_expression .)
+    OR              shift and go to state 81
 
-  ! PLUS            [ reduce using rule 20 (binary_expression -> unary_expression bin_op binary_expression .) ]
-  ! MINUS           [ reduce using rule 20 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! OR              [ reduce using rule 38 (cond_expression -> cond_expression OR cond_expression .) ]
 
-    bin_op                         shift and go to state 65
 
 state 104
 
-    (22) binary_expression -> LPAREN unary_expression bin_op unary_expression . RPAREN
-    (19) binary_expression -> unary_expression bin_op unary_expression .
-    (19) binary_expression -> unary_expression . bin_op unary_expression
-    (20) binary_expression -> unary_expression . bin_op binary_expression
-    (27) bin_op -> . PLUS
-    (28) bin_op -> . MINUS
+    (49) arg_list -> int_const COMMA arg_list .
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-    RPAREN          shift and go to state 113
-    PLUS            shift and go to state 66
-    MINUS           shift and go to state 67
+    RPAREN          reduce using rule 49 (arg_list -> int_const COMMA arg_list .)
 
-  ! PLUS            [ reduce using rule 19 (binary_expression -> unary_expression bin_op unary_expression .) ]
-  ! MINUS           [ reduce using rule 19 (binary_expression -> unary_expression bin_op unary_expression .) ]
-
-    bin_op                         shift and go to state 69
 
 state 105
 
-    (33) cond_expression -> LPAREN unary_expression LT unary_expression . RPAREN
-    (30) cond_expression -> unary_expression LT unary_expression .
+    (50) arg_list -> str_const COMMA arg_list .
 
-  ! shift/reduce conflict for RPAREN resolved as shift
-    RPAREN          shift and go to state 114
-    OR              reduce using rule 30 (cond_expression -> unary_expression LT unary_expression .)
-
-  ! RPAREN          [ reduce using rule 30 (cond_expression -> unary_expression LT unary_expression .) ]
+    RPAREN          reduce using rule 50 (arg_list -> str_const COMMA arg_list .)
 
 
 state 106
 
-    (34) cond_expression -> LPAREN unary_expression EQ unary_expression . RPAREN
-    (31) cond_expression -> unary_expression EQ unary_expression .
+    (48) arg_list -> id COMMA arg_list .
 
-  ! shift/reduce conflict for RPAREN resolved as shift
-    RPAREN          shift and go to state 115
-    OR              reduce using rule 31 (cond_expression -> unary_expression EQ unary_expression .)
-
-  ! RPAREN          [ reduce using rule 31 (cond_expression -> unary_expression EQ unary_expression .) ]
+    RPAREN          reduce using rule 48 (arg_list -> id COMMA arg_list .)
 
 
 state 107
 
-    (37) cond_expression -> LPAREN cond_expression OR cond_expression . RPAREN
-    (35) cond_expression -> cond_expression OR cond_expression .
-    (35) cond_expression -> cond_expression . OR cond_expression
+    (42) if_statement -> IF LPAREN cond_expression RPAREN LBRACE . statement RBRACE
+    (8) statement -> . empty
+    (9) statement -> . expression_statement statement
+    (10) statement -> . if_statement statement
+    (61) empty -> .
+    (11) expression_statement -> . assignment_statement SEMI
+    (12) expression_statement -> . func_call SEMI
+    (13) expression_statement -> . declarator SEMI
+    (14) expression_statement -> . ret SEMI
+    (42) if_statement -> . IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
+    (15) assignment_statement -> . id EQUALS expression
+    (16) assignment_statement -> . id EQUALS func_call
+    (43) func_call -> . ID LPAREN arg_list RPAREN
+    (56) declarator -> . TYPEID ID
+    (60) ret -> . RET LPAREN unary_expression RPAREN
+    (53) id -> . ID
 
-  ! shift/reduce conflict for RPAREN resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-    RPAREN          shift and go to state 116
-    OR              shift and go to state 77
+    RBRACE          reduce using rule 61 (empty -> .)
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    TYPEID          shift and go to state 25
+    RET             shift and go to state 15
 
-  ! OR              [ reduce using rule 35 (cond_expression -> cond_expression OR cond_expression .) ]
-  ! RPAREN          [ reduce using rule 35 (cond_expression -> cond_expression OR cond_expression .) ]
-
+    expression_statement           shift and go to state 14
+    func_call                      shift and go to state 24
+    assignment_statement           shift and go to state 17
+    ret                            shift and go to state 18
+    statement                      shift and go to state 117
+    declarator                     shift and go to state 26
+    if_statement                   shift and go to state 20
+    id                             shift and go to state 16
+    empty                          shift and go to state 21
 
 state 108
 
-    (38) cond_expression -> NOT LPAREN cond_expression RPAREN .
+    (23) binary_expression -> LPAREN unary_expression . bin_op unary_expression RPAREN
+    (24) binary_expression -> LPAREN unary_expression . bin_op binary_expression RPAREN
+    (20) binary_expression -> unary_expression . bin_op unary_expression
+    (21) binary_expression -> unary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    OR              reduce using rule 38 (cond_expression -> NOT LPAREN cond_expression RPAREN .)
-    SEMI            reduce using rule 38 (cond_expression -> NOT LPAREN cond_expression RPAREN .)
-    RPAREN          reduce using rule 38 (cond_expression -> NOT LPAREN cond_expression RPAREN .)
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
+    bin_op                         shift and go to state 98
 
 state 109
 
-    (39) if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement . RBRACE
+    (25) binary_expression -> LPAREN binary_expression bin_op binary_expression . RPAREN
+    (22) binary_expression -> binary_expression bin_op binary_expression .
+    (22) binary_expression -> binary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    RBRACE          shift and go to state 117
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    RPAREN          shift and go to state 118
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
+  ! PLUS            [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! MINUS           [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! MULTI           [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+  ! DIV             [ reduce using rule 22 (binary_expression -> binary_expression bin_op binary_expression .) ]
+
+    bin_op                         shift and go to state 68
 
 state 110
 
-    (24) binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .
+    (35) cond_expression -> LPAREN unary_expression GT unary_expression . RPAREN
+    (32) cond_expression -> unary_expression GT unary_expression .
 
-    PLUS            reduce using rule 24 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
-    MINUS           reduce using rule 24 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
-    SEMI            reduce using rule 24 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
-    RPAREN          reduce using rule 24 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 119
+    OR              reduce using rule 32 (cond_expression -> unary_expression GT unary_expression .)
+
+  ! RPAREN          [ reduce using rule 32 (cond_expression -> unary_expression GT unary_expression .) ]
 
 
 state 111
 
-    (32) cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .
+    (24) binary_expression -> LPAREN unary_expression bin_op binary_expression . RPAREN
+    (21) binary_expression -> unary_expression bin_op binary_expression .
+    (22) binary_expression -> binary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    OR              reduce using rule 32 (cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .)
-    SEMI            reduce using rule 32 (cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .)
-    RPAREN          reduce using rule 32 (cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .)
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    RPAREN          shift and go to state 120
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
+  ! PLUS            [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! MINUS           [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! MULTI           [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+  ! DIV             [ reduce using rule 21 (binary_expression -> unary_expression bin_op binary_expression .) ]
+
+    bin_op                         shift and go to state 68
 
 state 112
 
-    (23) binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .
+    (23) binary_expression -> LPAREN unary_expression bin_op unary_expression . RPAREN
+    (20) binary_expression -> unary_expression bin_op unary_expression .
+    (20) binary_expression -> unary_expression . bin_op unary_expression
+    (21) binary_expression -> unary_expression . bin_op binary_expression
+    (28) bin_op -> . PLUS
+    (29) bin_op -> . MINUS
+    (30) bin_op -> . MULTI
+    (31) bin_op -> . DIV
 
-    PLUS            reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
-    MINUS           reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
-    SEMI            reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
-    RPAREN          reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    RPAREN          shift and go to state 121
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 71
+    MULTI           shift and go to state 67
+    DIV             shift and go to state 70
 
+  ! PLUS            [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! MINUS           [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! MULTI           [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+  ! DIV             [ reduce using rule 20 (binary_expression -> unary_expression bin_op unary_expression .) ]
+
+    bin_op                         shift and go to state 73
 
 state 113
 
-    (22) binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .
+    (36) cond_expression -> LPAREN unary_expression LT unary_expression . RPAREN
+    (33) cond_expression -> unary_expression LT unary_expression .
 
-    PLUS            reduce using rule 22 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
-    MINUS           reduce using rule 22 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
-    SEMI            reduce using rule 22 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
-    RPAREN          reduce using rule 22 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 122
+    OR              reduce using rule 33 (cond_expression -> unary_expression LT unary_expression .)
+
+  ! RPAREN          [ reduce using rule 33 (cond_expression -> unary_expression LT unary_expression .) ]
 
 
 state 114
 
-    (33) cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .
+    (37) cond_expression -> LPAREN unary_expression EQ unary_expression . RPAREN
+    (34) cond_expression -> unary_expression EQ unary_expression .
 
-    OR              reduce using rule 33 (cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .)
-    SEMI            reduce using rule 33 (cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .)
-    RPAREN          reduce using rule 33 (cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .)
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 123
+    OR              reduce using rule 34 (cond_expression -> unary_expression EQ unary_expression .)
+
+  ! RPAREN          [ reduce using rule 34 (cond_expression -> unary_expression EQ unary_expression .) ]
 
 
 state 115
 
-    (34) cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .
+    (40) cond_expression -> LPAREN cond_expression OR cond_expression . RPAREN
+    (38) cond_expression -> cond_expression OR cond_expression .
+    (38) cond_expression -> cond_expression . OR cond_expression
 
-    OR              reduce using rule 34 (cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .)
-    SEMI            reduce using rule 34 (cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .)
-    RPAREN          reduce using rule 34 (cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .)
+  ! shift/reduce conflict for RPAREN resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    RPAREN          shift and go to state 124
+    OR              shift and go to state 81
+
+  ! OR              [ reduce using rule 38 (cond_expression -> cond_expression OR cond_expression .) ]
+  ! RPAREN          [ reduce using rule 38 (cond_expression -> cond_expression OR cond_expression .) ]
 
 
 state 116
 
-    (37) cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .
+    (41) cond_expression -> NOT LPAREN cond_expression RPAREN .
 
-    OR              reduce using rule 37 (cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .)
-    SEMI            reduce using rule 37 (cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .)
-    RPAREN          reduce using rule 37 (cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .)
+    OR              reduce using rule 41 (cond_expression -> NOT LPAREN cond_expression RPAREN .)
+    SEMI            reduce using rule 41 (cond_expression -> NOT LPAREN cond_expression RPAREN .)
+    RPAREN          reduce using rule 41 (cond_expression -> NOT LPAREN cond_expression RPAREN .)
 
 
 state 117
 
-    (39) if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .
+    (42) if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement . RBRACE
 
-    IF              reduce using rule 39 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
-    ID              reduce using rule 39 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
-    TYPEID          reduce using rule 39 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
-    RBRACE          reduce using rule 39 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
+    RBRACE          shift and go to state 125
+
+
+state 118
+
+    (25) binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .
+
+    RPAREN          reduce using rule 25 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+    PLUS            reduce using rule 25 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+    MINUS           reduce using rule 25 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+    MULTI           reduce using rule 25 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+    DIV             reduce using rule 25 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+    SEMI            reduce using rule 25 (binary_expression -> LPAREN binary_expression bin_op binary_expression RPAREN .)
+
+
+state 119
+
+    (35) cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .
+
+    OR              reduce using rule 35 (cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .)
+    SEMI            reduce using rule 35 (cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .)
+    RPAREN          reduce using rule 35 (cond_expression -> LPAREN unary_expression GT unary_expression RPAREN .)
+
+
+state 120
+
+    (24) binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .
+
+    RPAREN          reduce using rule 24 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+    PLUS            reduce using rule 24 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+    MINUS           reduce using rule 24 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+    MULTI           reduce using rule 24 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+    DIV             reduce using rule 24 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+    SEMI            reduce using rule 24 (binary_expression -> LPAREN unary_expression bin_op binary_expression RPAREN .)
+
+
+state 121
+
+    (23) binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .
+
+    RPAREN          reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+    PLUS            reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+    MINUS           reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+    MULTI           reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+    DIV             reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+    SEMI            reduce using rule 23 (binary_expression -> LPAREN unary_expression bin_op unary_expression RPAREN .)
+
+
+state 122
+
+    (36) cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .
+
+    OR              reduce using rule 36 (cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .)
+    SEMI            reduce using rule 36 (cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .)
+    RPAREN          reduce using rule 36 (cond_expression -> LPAREN unary_expression LT unary_expression RPAREN .)
+
+
+state 123
+
+    (37) cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .
+
+    OR              reduce using rule 37 (cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .)
+    SEMI            reduce using rule 37 (cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .)
+    RPAREN          reduce using rule 37 (cond_expression -> LPAREN unary_expression EQ unary_expression RPAREN .)
+
+
+state 124
+
+    (40) cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .
+
+    OR              reduce using rule 40 (cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .)
+    SEMI            reduce using rule 40 (cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .)
+    RPAREN          reduce using rule 40 (cond_expression -> LPAREN cond_expression OR cond_expression RPAREN .)
+
+
+state 125
+
+    (42) if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .
+
+    IF              reduce using rule 42 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
+    ID              reduce using rule 42 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
+    TYPEID          reduce using rule 42 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
+    RET             reduce using rule 42 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
+    RBRACE          reduce using rule 42 (if_statement -> IF LPAREN cond_expression RPAREN LBRACE statement RBRACE .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for OR in state 76 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 83 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 83 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 87 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 87 resolved as shift
+WARNING: shift/reduce conflict for OR in state 80 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 88 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 88 resolved as shift
-WARNING: shift/reduce conflict for OR in state 98 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 101 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 101 resolved as shift
-WARNING: shift/reduce conflict for RPAREN in state 102 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 103 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 103 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 104 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 104 resolved as shift
-WARNING: shift/reduce conflict for RPAREN in state 105 resolved as shift
-WARNING: shift/reduce conflict for RPAREN in state 106 resolved as shift
-WARNING: shift/reduce conflict for RPAREN in state 107 resolved as shift
-WARNING: shift/reduce conflict for OR in state 107 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 88 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 88 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 92 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 92 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 92 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 92 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 93 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 93 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 93 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 93 resolved as shift
+WARNING: shift/reduce conflict for OR in state 103 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 109 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 109 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 109 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 109 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 110 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 111 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 111 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 111 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 111 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 112 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 112 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 112 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 112 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 113 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 114 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 115 resolved as shift
+WARNING: shift/reduce conflict for OR in state 115 resolved as shift

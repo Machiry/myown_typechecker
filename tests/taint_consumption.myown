@@ -1,0 +1,16 @@
+untaint sanitize(taint y);
+taint strcpy(untaint dst,taint src);
+taint user_input();
+
+untaint main() {
+    taint input;
+    untaint san_input;
+    untaint work_data;
+    
+    input = user_input();
+    san_input = sanitize(input);
+    
+    if(san_input < 1024) {
+        strcpy(work_data,input); 
+    }
+}

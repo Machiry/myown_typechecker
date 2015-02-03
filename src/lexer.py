@@ -53,7 +53,8 @@ class MyOwnLexer(object):
     reserved = {
         'if' : 'IF',
         'taint' : 'TYPEID',
-        'untaint' : 'TYPEID'
+        'untaint' : 'TYPEID',
+        'return' : 'RET'
     }
 
                 
@@ -61,17 +62,14 @@ class MyOwnLexer(object):
         # Literals (identifier, types , integer constant, string constant)
         'ID', 'ICONST', 'SCONST',
         
-        #keywords
-        #'KEYWORD',
+        # Operators (+,-,|,~, <, >, ==)
+        'PLUS', 'MINUS', 'MULTI','DIV','OR', 'NOT', 'LT', 'GT', 'EQ',
         
-        # Operators (+,-,*,/,%,|,&,~,^,<<,>>, ||, &&, !, <, <=, >, >=, ==, !=)
-        'PLUS', 'MINUS', 'OR', 'NOT', 'LT', 'GT', 'EQ',
-        
-        # Assignment (=, *=, /=, %=, +=, -=, <<=, >>=, &=, ^=, |=)
+        # Assignment (=)
         'EQUALS',
 
         
-        # Delimeters ( ) [ ] { } , . ; :
+        # Delimeters ( ) ,{ } , ;
         'LPAREN', 'RPAREN',
         'LBRACE', 'RBRACE',
         'COMMA', 'SEMI',
@@ -84,6 +82,8 @@ class MyOwnLexer(object):
     # Operators
     t_PLUS             = r'\+'
     t_MINUS            = r'-'
+    t_MULTI            = r'\*'
+    t_DIV              = r'/'
     t_OR               = r'\|'
     t_NOT              = r'~'
     t_LT               = r'<'

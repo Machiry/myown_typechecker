@@ -1,0 +1,35 @@
+untaint sanitize(taint y);
+taint user_input();
+untaint untaint_int(taint x);
+
+taint fact(taint x) {
+    taint y;
+    taint x1;
+    taint ret;
+    taint fact_x1;
+    untaint x_untaint;
+    x1 = x;
+    y = x - 1;
+    x_untaint = untaint_int(x);
+    if((x_untaint < 0) | (x_untaint == 0)) {
+        return (1);
+    }
+    fact_x1 = fact(x1);
+    ret = x1 * fact_x1;
+    return (ret);    
+}
+
+untaint main() {
+    taint input;
+    taint input1;
+    untaint san_input;
+    
+    input = user_input();
+    input1 = input;
+    san_input = sanitize(input);
+        
+    if(san_input < 1024) {        
+        sanitize(input1); 
+    }
+    input1 = input1 + 1;
+}

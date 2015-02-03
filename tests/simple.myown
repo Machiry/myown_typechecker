@@ -1,0 +1,19 @@
+untaint get_untaint_input();
+
+taint foo(taint x) {
+    taint y;
+    y = x + 1;
+    untaint z;
+    z = get_untaint_input();
+    if (z > 0) {
+        z = z + 1;
+        return (z);
+    }
+    y = y + 3;
+    return (y);
+}
+
+untaint main() {
+    taint v;
+    v = foo(3);
+}
