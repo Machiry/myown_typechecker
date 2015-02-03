@@ -278,7 +278,7 @@ class LinearTaintChecker(object):
                     (arg_ret,arg_fine) = self.verify_ast_node(curr_arg,assumptions)
                     if arg_fine:
                         if not (arg_ret == target_func[args_key][i] or ((not self.is_linear_type(arg_ret)) and self.is_linear_type(target_func[args_key][i]))):
-                            self.__error_msg('Error: Expected argument type:' + target_func[args_key][i] + ' got:'+arg_ret)
+                            self.__error_msg('Error: Expected argument type:' + target_func[args_key][i] + ' got:'+arg_ret + ' at:' + str(ast_node.coord))
                             args_fine = False
                             break
                     else:
