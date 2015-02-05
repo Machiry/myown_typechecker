@@ -1,4 +1,4 @@
-# myown_typecheker
+# myown_typechecker
 Linear Type Checker for MyOwn Language
 
 Implementation of a Linear Type Checker, where taint and untaint are considered as linear and non-linear types respectively. Type Checker mimics static taint propogation, where typing rules are taint rules.
