@@ -5,10 +5,14 @@ Implementation of a Linear Type Checker, where taint and untaint are considered 
 
 Refer Docs for more details.
 
-Costom language (myown) is used. Refer docs/myown_grammer for grammer and tests for examples.
+Costom imperative language (named myown) is used. Its a minimal subset of C.
 
-Usage:
-	python main.py -f <file_to_be_typechecked>
+Refer docs/myown_grammer for grammer and tests for examples.
 
-Requirements:
+## Usage
+	python main.py -f file_to_be_typechecked
+
+## Requirements:
+	>= Python 2.7
 	Python Package: ply  
+	
