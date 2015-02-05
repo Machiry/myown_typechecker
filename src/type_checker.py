@@ -494,7 +494,7 @@ class LinearTaintChecker(object):
             else:
                 self.__error_msg('Unable to typecheck right of the assignment at:' + str(ast_node.right.coord) +'\n Available Assumptions:' + str(assumptions))
         else:
-            self.__error_msg('Unable to typecheck left of the assignment at:' + str(ast_node.left.coord) +'\n Available Assumptions:' + str(assumptions))    
+            self.__error_msg('Unable to typecheck left of the binary expression at:' + str(ast_node.left.coord) +'\n Available Assumptions:' + str(assumptions))    
         return (to_ret,all_fine)
         
     
@@ -518,12 +518,6 @@ class LinearTaintChecker(object):
             #get the type of rvalue
             (right_ret,right_fine) = self.verify_ast_node(ast_node.rvalue,assumptions)
             if right_fine:
-                '''right_node_name = ast_node.rvalue.__class__.__name__
-                if right_node_name in self.allowed_force_assignment:
-                    # if force assignment is allowed                    
-                    self.__debug_msg('Allowing Force assignment as function retunes non-linear type')
-                    target_type = right_ret
-                else:'''
                 target_type = self.get_assignment_type(left_ret,right_ret)
                 if target_type:
                     all_fine = self.insert_variable_type(ast_node.lvalue.name,target_type,assumptions,force=True)

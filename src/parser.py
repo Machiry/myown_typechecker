@@ -178,9 +178,9 @@ class MyOwnParser(PLYParser):
         '''
         
         if len(p) == 3:
-            p[0] = BinaryOp(p[1],p[2],None,coord=p[1].coord)
+            p[0] = BinaryOp(p[1],p[2],None,coord=p[2].coord)
         elif len(p) == 5:
-            p[0] = BinaryOp(p[1],p[3],None,coord=p[1].coord)
+            p[0] = BinaryOp(p[1],p[3],None,coord=p[3].coord)
         else:
             start = 1
             if len(p) == 6:
