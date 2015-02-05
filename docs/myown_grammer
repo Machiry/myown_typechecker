@@ -1,3 +1,5 @@
+NOTE: This may be outdated, please refer parser.py to get the current version of parser
+
 translation_unit_or_empty   : translation_unit
                                     | empty
 

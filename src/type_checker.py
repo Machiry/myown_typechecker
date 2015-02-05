@@ -474,7 +474,7 @@ class LinearTaintChecker(object):
             3) returns the merged type
     '''
     def verify_BinaryOp(self,ast_node,assumptions):
-        self.__debug_msg('Verifying Assignment:' + str(ast_node) + ' at line:' + str(ast_node.coord))
+        self.__debug_msg('Verifying BinaryOp:' + str(ast_node) + ' at line:' + str(ast_node.coord))
         #get type of left
         (left_ret,left_fine) = self.verify_ast_node(ast_node.left,assumptions)
         all_fine = left_fine
@@ -518,13 +518,13 @@ class LinearTaintChecker(object):
             #get the type of rvalue
             (right_ret,right_fine) = self.verify_ast_node(ast_node.rvalue,assumptions)
             if right_fine:
-                right_node_name = ast_node.rvalue.__class__.__name__
+                '''right_node_name = ast_node.rvalue.__class__.__name__
                 if right_node_name in self.allowed_force_assignment:
                     # if force assignment is allowed                    
                     self.__debug_msg('Allowing Force assignment as function retunes non-linear type')
                     target_type = right_ret
-                else:
-                    target_type = self.get_assignment_type(left_ret,right_ret)
+                else:'''
+                target_type = self.get_assignment_type(left_ret,right_ret)
                 if target_type:
                     all_fine = self.insert_variable_type(ast_node.lvalue.name,target_type,assumptions,force=True)
                     if all_fine:

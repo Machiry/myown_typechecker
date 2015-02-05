@@ -7,6 +7,7 @@ taint foo(taint x) {
     z = get_untaint_input();
     if (z > 0) {
         z = z + 1;
+        #although, this is untaint, we consider the return value as taint
         return (z);
     }
     y = y + 3;
@@ -15,5 +16,6 @@ taint foo(taint x) {
 
 untaint main() {
     taint v;
+    #untaint can be passed if taint is expected.
     v = foo(3);
 }

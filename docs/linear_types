@@ -1,0 +1,8 @@
+linear types:
+    taint
+non linear types:
+    untaint
+
+introduction:
+    taint id; -> {id:taint}
+    

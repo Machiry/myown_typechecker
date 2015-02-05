@@ -17,7 +17,7 @@ class MyOwnParser(PLYParser):
         self.myparser = yacc.yacc(
             module=self,
             start='translation_unit_or_empty',
-            debug=True,
+            debug=False,
             optimize=False,
             tabmodule='myownparser.yacctab')
 
@@ -122,12 +122,12 @@ class MyOwnParser(PLYParser):
 
     def p_assignment_statement(self,p):
         ''' assignment_statement : id EQUALS expression
-                                 | id EQUALS func_call
         '''
         p[0] = Assignment(p[2],p[1],p[3],coord=p[1].coord)
 
     def p_expression(self,p):
-        ''' expression : unary_expression
+        ''' expression : func_call
+                       | unary_expression
                        | binary_expression
                        | cond_expression
         '''
@@ -152,6 +152,7 @@ class MyOwnParser(PLYParser):
     def p_unary_expression(self,p):
         ''' unary_expression : id
                              | int_const
+                             | func_call
         '''
         p[0] = p[1]
         
@@ -206,12 +207,12 @@ class MyOwnParser(PLYParser):
         p[0] = []
 
     def p_arg_list_2(self,p):
-        ''' arg_list : id
-                     | int_const
+        ''' arg_list : int_const
+                     | id
                      | str_const
-                     | id COMMA arg_list
-                     | int_const COMMA arg_list
                      | str_const COMMA arg_list
+                     | int_const COMMA arg_list
+                     | id COMMA arg_list
         '''
         #print 'p_arg_list_2'
         arg_list = []
@@ -293,7 +294,7 @@ class MyOwnParser(PLYParser):
     
     def p_ret(self,p):
         '''
-            ret : RET LPAREN unary_expression RPAREN
+            ret : RET LPAREN expression RPAREN
         '''
         p[0] = Return(p[3],coord=p[3].coord)
 

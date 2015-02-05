@@ -1,0 +1,62 @@
+\documentclass[11pt, pdftex]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage[hyphens]{url}
+\usepackage[breaklinks]{hyperref}
+\usepackage[demo]{graphicx}
+\usepackage{subcaption}
+\title{Laint: Static Taint Tracking using Linear Types}
+\author{Machiry Aravind Kumar}
+\date{UCSB}
+\begin{document}
+\maketitle
+\section{Taint Tracking}
+Any variable that can be modified/provided by an outside user poses a potential security risk, if used unverified in an program. Example: strcpy of an user provided data without checking for length. Taint Tracking tracks these variables inside a program and warns if used in places where untainted or safe data is expected. \\
+This can be done statically or dynamically (by instrumenting the program).\\
+Any taint tracking system needs following information:
+\begin{itemize}
+\item Taint Introduction.
+\begin{description}
+How taint is introduced into the program. Ex: function that reads input from user.
+\end{description}
+\item Taint Policy
+\begin{description}
+Functions or Points in program where corresponding variables should be checked for taint and appropriate action must be taken.
+\end{description}
+\item {Taint Propagation}
+\begin{description}
+Rules on how taint propagates in the program.
+\end{description}
+\end{itemize}
+\section{Goal}
+Viewing static taint tracking as a type checker for linear type system and implementing the same.
+\section{Types}
+\subsection{Linear Types or (Semi-Linear Types)}
+\begin{itemize}
+\item Taint ( or taint)
+\begin{description}
+This type signifies something which is unverified and could be potentially malicious.
+\end{description}
+\end{itemize}
+\subsection{Non Linear Types}
+\begin{itemize}
+\item Un Taint ( or untaint)
+\begin{description}
+This type signifies something which is verified and safe.
+\end{description}
+\end{itemize}
+\subsection{Typing Rules}
+There are special functions called {\bf Sanitizers}, which have atleast one parameter of type taint and return untaint value.
+\begin{itemize}
+\item Taint Introduction: Explicit declaration or return from function can introduce or change the variable type to taint.
+\item Taint Policy: All expression used in if must be of untainted type
+\begin{description}
+This is to avoid any side channel attacks.
+\end{description}
+\item Taint Policy: Non Linear types can be converted into linear types but not the other way round.
+\item Taint Propagation: Any expression involving taint type will get taint type, expect for Sanitizers
+\item Taint Policy : Sanitizers consume taint arguments, a program cannot be able to use a tainted variable used as an argument to a sanitizer function.
+\end{itemize}
+\end{document}

@@ -128,4 +128,7 @@ class MyOwnLexer(object):
         r'\n+'
         t.lexer.lineno += t.value.count('\n')
         #print 'INLEXER:' + str(t.lexer.lineno)
+    
+    def t_comment(self, t):
+        r'[ \t]*\#[^\n]*'
         
