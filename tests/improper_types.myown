@@ -1,4 +1,3 @@
-untaint sanitize(taint y);
 taint user_input();
 untaint get_system_input();
 untaint access_secure_storage(untaint index);
@@ -8,6 +7,10 @@ untaint main() {
     untaint work_data;
     work_data = get_system_input();
     input = user_input();
+    
+    #here, work_data though untainted will become tainted here. 
     work_data = work_data + input;
+    
+    #this needs untained input and typecheck fails.
     access_secure_storage(work_data);
 }

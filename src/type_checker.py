@@ -532,7 +532,7 @@ class LinearTaintChecker(object):
                     else:
                          self.__internal_error_msg('Internal Error, problem occured while inserting new type from Assignment')
                 else:
-                    self.__error_msg('Error: cannot assign :' + right_ret + ' to ' + left_ret)
+                    self.__error_msg('Error: cannot assign :' + right_ret + ' to ' + left_ret + ' at' + str(ast_node.coord))
         return (to_ret,all_fine)
 
 
