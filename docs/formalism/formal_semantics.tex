@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{listings}
+\usepackage{semantic}
 \usepackage[hyphens]{url}
 \usepackage[breaklinks]{hyperref}
 \usepackage[demo]{graphicx}
@@ -30,6 +31,7 @@ Functions or Points in program where corresponding variables should be checked f
 Rules on how taint propagates in the program.
 \end{description}
 \end{itemize}
+More details about static taint tracking can be found at \cite{Wiki03}, \cite{Write04}
 \section{Goal}
 Viewing static taint tracking as a type checker for linear type system and implementing the same.
 \section{Types}
@@ -48,15 +50,72 @@ This type signifies something which is verified and safe.
 \end{description}
 \end{itemize}
 \subsection{Typing Rules}
-There are special functions called {\bf Sanitizers}, which have atleast one parameter of type taint and return untaint value.
+Information required for static taint tracking are represented as typing rules.
+\\
+\\
+Informally following are the Taint tracking rules.
 \begin{itemize}
-\item Taint Introduction: Explicit declaration or return from function can introduce or change the variable type to taint.
-\item Taint Policy: All expression used in if must be of untainted type
+\item Taint Introduction: Explicit declaration or assignment can introduce or change the variable type to taint.
+\item Taint Policy: An expression used in if must be of untainted type
 \begin{description}
 This is to avoid any side channel attacks.
 \end{description}
-\item Taint Policy: Non Linear types can be converted into linear types but not the other way round.
-\item Taint Propagation: Any expression involving taint type will get taint type, expect for Sanitizers
-\item Taint Policy : Sanitizers consume taint arguments, a program cannot be able to use a tainted variable used as an argument to a sanitizer function.
+\item Taint Policy: untainted variables can become tainted but not the other way round (i.e Non Linear types can be converted into linear types but not the other way round).
+\item Taint Propagation: Any expression involving taint type will be of taint type, expect for Sanitizers.
+{\bf Sanitizers} are functions, which have atleast one parameter of type taint and return untaint value.
+\item Taint Policy : Sanitizers consume taint arguments, once used as an argument to sanitizer a tainted variable cannot be further used in the program.
 \end{itemize}
+These can be represented formally as typing rules as shown below. Note that there are syntactic rules of the language that are omitted i.e a function cannot be defined multiple times, function signature has to match declaration and definition, variable need to be declared before used.
+\subsubsection{Default Types}
+These are the default types for variables and constants. Note that unknown is not actually a type, this is to indicate that corresponding variable is not declared or not given a specific type.
+$$ \inference {}{\Gamma \vdash v:unknown}[UntypedVariable]$$
+\\
+$$ \inference {}{\Gamma \vdash int:untaint}[IntegerConstant]$$
+\\
+$$ \inference {}{\Gamma \vdash string:untaint}[StringConstant]$$
+\subsubsection{Variable Declaration (Taint Introduction)}
+These rules specify how variables can be declared. There is a partial order for the available types as shown below:
+$$ unknown \sqsubseteq untaint \quad unknown \sqsubseteq taint \quad untaint \sqsubseteq taint $$
+Variable can be declared (if initial type is unknown) or redeclared to promote to a higher type in the partial order. This specifies one of the important property of linear types, non-linear types can be converted into linear but not vice versa.
+$$ \inference {\Gamma ,v:t \vdash eval(t1 \; v;stmts) \quad t \sqsubseteq t1}{\Gamma , v:t1 \vdash eval(stmts)}[VariableDeclaration]$$
+\subsubsection{Binary Expression (Taint Propagation)}
+Binary expression follow below rules to get their types, as you can see expression is untainted only if all values used are  untainted.
+$$ \inference {\Gamma \vdash x:taint}{\Gamma \vdash x \bigotimes y:taint}[TaintedBinaryExpression]$$
+\\
+$$ \inference {\Gamma \vdash x:untaint, y:untaint}{\Gamma \vdash x \bigotimes y:untaint}[UnTaintedBinaryExpression]$$
+\subsubsection{Assignment Expression (Taint Propagation)}
+As specified from rules below, assignment can be done according to the partial order and all variables involved are declared. Note that this allows assigning tainted values to untainted variable, resulting in tainted the variable.
+$$ \inference {\Gamma , x:t1 , y:t2 \vdash eval(y=x;stmts) \quad t1 \neq unknown \quad t2 \neq unknown \quad t2 \sqsubseteq t1}{\Gamma , x:t1 , y:t1 \vdash eval(stmts)}[Assignment]$$
+\subsubsection{Untainted Control (Taint Policy)}
+This is one of our taint policy i.e not to allow any tainted value to control program flow. This is captured by below rule which doesn't allow tainted conditional expression in if.
+$$ \inference {\Gamma \vdash c:untaint \quad \Gamma \vdash eval(if(c) \{condstmts;\} stmts)}{\Gamma \vdash eval(condstmts;stmts)}[UntaintedCondition]$$
+\subsubsection{Function Definition evaluation (Taint Propagation)}
+To evaluative function definition, we follow the below rule, as you can see function body is evaluated by adding types of the arguments and function type itself. whereas rest of the statements are evaluated by adding function type.\\
+\\
+\resizebox{\linewidth}{!}{%
+$$ \inference {\Gamma \vdash eval(tret\;func(t\;arg1,t2\;arg2,...)\{funcstmts\}\; stmts)}{\Gamma , arg1:t , arg2:t2 , func:(t,t2,...) \to tret \vdash eval(funcstmts) \quad \Gamma , func:(t,t2,...) \to tret \vdash eval(stmts)}[FunctionEvaluvation]$$
+}
+\subsubsection{Function Declaration evaluation (Taint Propagation)}
+Similar to function definition, declaration is evaluated by just adding function type to the set of assumptions.
+$$ \inference {\Gamma \vdash eval(rtype \; foo(t1\;v1,t2\;v2,...);stmts)}{\Gamma , foo:(t1,t2,...) \to rtype \vdash eval(stmts)}[FunctionTypeIntroduction]$$
+\subsubsection{Evaluating Sanitizer (Taint Policy)}
+This is an important rule and captures the linearity. Here, a taint variable used as an argument to a sanitizer function will be consumed by it and is no longer available for evaluation.
+$$ \inference {\Gamma , v:taint , sanitizer:(...,taint,...) \to untaint \vdash eval(sanitizer(...,v,...);stmts)}{\Gamma , sanitizer:(...,taint,...) \to untaint \vdash eval(stmts)}[TaintConsumption]$$
+\subsubsection{Function call evaluation with untainted types (Taint Propagation) }
+As untainted type is non linear type it can be used unlimitedly. The below rules captures this:
+$$ \inference {\Gamma , v:untaint , foo:(...,t,...) \to * \vdash eval(foo(...,v,...);stmts)}{\Gamma ,  v:untaint , foo:(...,t,...) \to * \vdash eval(stmts)}[UnTaintPropogation]$$
+\subsubsection{Non Sanitizer evaluation with tainted types (Taint Propagation)}
+A non-sanitizer function cannot consume a taint variable as shown in below rule:
+$$ \inference {\Gamma , v:taint , foo:(...,t,...) \to taint \vdash eval(foo(...,v,...);stmts)}{\Gamma ,  v:taint , foo:(...,t,...) \to taint \vdash eval(stmts)}[NonSanitizerFunction]$$
+
+\begin{thebibliography}{2}
+
+\bibitem{Wiki03}
+\emph{Wikipedia}.
+http://en.wikipedia.org/wiki/Taint\_checking
+
+\bibitem{Write04}
+\emph{Static Taint Analysis for C}.
+https://code.google.com/p/tanalysis/
+\end{thebibliography}
 \end{document}
