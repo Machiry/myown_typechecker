@@ -25,8 +25,8 @@ TypeChecker: src/type_checker.py
 ## Tests:
 All tests are present under tests folder.
     
-To run a test:
-    python src/main.py -f tests/typechecker_fails/simple_if_taint.myown
+	To run a test:
+    	python src/main.py -f tests/typechecker_fails/simple_if_taint.myown
     
 Negative tests are under: tests/typechecker_fails these contain cases where programs are incorrectly typed. 
 Corresponding correctly typed programs are located under: tests/typechecker_passes folder.
