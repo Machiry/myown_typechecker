@@ -17,21 +17,22 @@ untaint get_system_param(taint idx) {
 untaint main() {
     taint input;
     untaint san_input;
+    untaint san_input1;
     untaint final_index;
     
     input = user_input();
     san_input = sanitize(input);
-        
+    san_input1 = san_input;
     if(san_input < 1024) {        
         #here san_input becomes tainted
         san_input = san_input + user_input();
     }
     
-    if(~(get_secure_index() == 0)) {
+    if((get_secure_index() == 0)) {
         #san_input is consumed here as get_system_resource is a sanitizer
         final_index = get_system_resource(san_input);
     }
     
     #will fail to type check as type of san_input is unavailable
-    return (san_input + final_index);
+    return (san_input1 + final_index);
 }

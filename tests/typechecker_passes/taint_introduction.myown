@@ -19,8 +19,9 @@ untaint main() {
 	san_input = san_input + user_input();
     }
     
-    #We will get error here as san_input is tainted
-    if(san_input < 1024) {        
+    #Type checking will fail here as san_input is tainted.
+    #chagining it to untained type
+    if(system_input < 1024) {        
         secure_function(); 
     }
 }

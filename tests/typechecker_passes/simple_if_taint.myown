@@ -1,0 +1,28 @@
+taint get_user_input();
+untaint get_system_max();
+untaint strcpy(taint dst,taint src);
+untaint printf(untaint str);
+untaint strcmp(taint src,taint dst);
+
+untaint main() {
+    taint x;
+    untaint y;
+    untaint buff;
+    y = get_system_max();
+    #here, x is tainted.
+    x = get_user_input();
+    #type checking fails here, as it expects untainted/non-linear type in if clause.
+    #Fix is to use non-linear type in If clause, again there are many ways to fix, this.
+    if (y < 1024) {
+        taint user_input;
+        user_input = get_user_input();
+        strcpy(buff,user_input);
+    }
+    y = strcmp(buff,"Password");
+    if(y == 0) {
+        printf("Success");
+        return (0);
+    }
+    printf("Failure");
+    return (1);
+}

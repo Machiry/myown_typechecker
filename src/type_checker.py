@@ -2,38 +2,46 @@ from ast.c_ast import *
 
 class LinearTaintChecker(object):
     def __init__(self,linear_types,non_linear_types,debug=False):
-        self.TAG = 'LinearTaintChecker:'
+        self.TAG = 'Laint:'
         self.var_type_name = 'variables'
         self.func_type_name = 'functions'
+        #for debugging
         self.debug = debug
         self.allowed_force_assignment = ['FuncCall']
         self.assumptions = {}
+        #initial assumptions
         self.initialize_assumptions(self.assumptions)
+        #linear types
         self.linear_types = linear_types[:]
+        #non linear types
         self.non_linear_types = non_linear_types[:]
         
         #current function under evaluvation
         self.curr_function = None
+        
+        #flag to indicate, error has been printed.
+        self.error_printed = False
 
     def do_type_checking(self, top_ast_node):
         to_ret = True
         for curr_node in top_ast_node:
             (curr_node_ret,curr_node_fine) = self.verify_ast_node(curr_node,self.assumptions)
             if not curr_node_fine:
-                print 'Error occured while Type Checking:' + str(curr_node)
+                self.__error_msg('Error occured while Type Checking:' + str(curr_node))
                 to_ret = False
                 break
                 
         return to_ret
     
-    # logging
-    
+    # logging    
     def __debug_msg(self,msg):
         if self.debug:
             print self.TAG + msg
     
     def __error_msg(self,msg):
-        print self.TAG + ' TYPECHECK_FAILED:'+ msg
+        if not self.error_printed:
+            print self.TAG + ' TYPECHECKING FAILED, REASON : '+ msg
+            self.error_printed = True
         
     def __internal_error_msg(self,msg):
         print self.TAG +' INTERNAL ERROR:' + msg
@@ -45,8 +53,7 @@ class LinearTaintChecker(object):
         new_assumptions[self.func_type_name] = {}
 
     
-    # Helper functions
-    
+    # Helper functions    
     def get_variable_type(self,var_name,assumptions):
         to_ret = None
         if self.var_type_name in assumptions:
@@ -519,6 +526,7 @@ class LinearTaintChecker(object):
             (right_ret,right_fine) = self.verify_ast_node(ast_node.rvalue,assumptions)
             if right_fine:
                 target_type = self.get_assignment_type(left_ret,right_ret)
+                #if operation is allowed, if yes, get target type.
                 if target_type:
                     all_fine = self.insert_variable_type(ast_node.lvalue.name,target_type,assumptions,force=True)
                     if all_fine:
@@ -556,6 +564,6 @@ class LinearTaintChecker(object):
             else:
                 self.__internal_error_msg('No current function found. self.curr_function is None')                
         else:
-            self.__error_msg('Unable to get type of the expression provided in return at:' + str(ast_node.coord) +'\n Available Assumptions:' + str(assumptions))
+             self.__error_msg('Unable to get type of the expression provided in return at:' + str(ast_node.coord) +'\n Available Assumptions:' + str(assumptions))
 
         return (to_ret,all_fine)

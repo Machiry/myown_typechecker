@@ -1,13 +1,11 @@
-NOTE: This may be outdated, please refer parser.py to get the current version of parser
-
 translation_unit_or_empty   : translation_unit
-                                    | empty
+                              | empty
 
         
 translation_unit : external_declaration
 
      
-translation_unit    : translation_unit external_declaration
+translation_unit : translation_unit external_declaration
 
 external_declaration : function_declaration
 
@@ -27,58 +25,59 @@ external_declaration : function_definition
 function_definition : func_decl LBRACE statement RBRACE
 
 statement : empty
-                      | expression_statement statement
-                      | if_statement statement
+           | expression_statement statement
+           | if_statement statement
                       
 expression_statement : assignment_statement SEMI
-                                 | func_call SEMI
-                                 | declarator SEMI
-                                 | ret SEMI
+                       | func_call SEMI
+                       | declarator SEMI
+                       | ret SEMI
 
 assignment_statement : id EQUALS expression
-                       | id EQUALS func_call
                        
 id : ID
 
-expression : unary_expression
-                       | binary_expression
-                       | cond_expression
+expression : func_call
+             | unary_expression
+             | binary_expression
+             | cond_expression
 
 binary_expression : unary_expression bin_op unary_expression
-                              | unary_expression bin_op binary_expression
-                              | binary_expression bin_op binary_expression
-                              | LPAREN unary_expression bin_op unary_expression RPAREN
-                              | LPAREN unary_expression bin_op binary_expression RPAREN
-                              | LPAREN binary_expression bin_op binary_expression RPAREN
+                    | unary_expression bin_op binary_expression
+                    | binary_expression bin_op binary_expression
+                    | LPAREN unary_expression bin_op unary_expression RPAREN
+                    | LPAREN unary_expression bin_op binary_expression RPAREN
+                    | LPAREN binary_expression bin_op binary_expression RPAREN
 
 unary_expression : id
-                             | int_const
+                  | int_const
+                  | func_call
 
 cond_expression : unary_expression GT unary_expression
-                            | unary_expression LT unary_expression
-                            | unary_expression EQ unary_expression
-                            | LPAREN unary_expression GT unary_expression RPAREN
-                            | LPAREN unary_expression LT unary_expression RPAREN
-                            | LPAREN unary_expression EQ unary_expression RPAREN
-                            | cond_expression OR cond_expression
-                            | NOT cond_expression
-                            | LPAREN cond_expression OR cond_expression RPAREN
-                            | NOT LPAREN cond_expression RPAREN
+                  | unary_expression LT unary_expression
+                  | unary_expression EQ unary_expression
+                  | LPAREN unary_expression GT unary_expression RPAREN
+                  | LPAREN unary_expression LT unary_expression RPAREN
+                  | LPAREN unary_expression EQ unary_expression RPAREN
+                  | cond_expression OR cond_expression
+                  | NOT cond_expression
+                  | LPAREN cond_expression OR cond_expression RPAREN
+                  | NOT LPAREN cond_expression RPAREN
 
 if_statement : IF LPAREN cond_expression RPAREN LBRACE statement RBRACE
                              
 bin_op : PLUS
-                   | MINUS
-                   | MULTI
-                   | DIV
+        | MINUS
+        | MULTI
+        | DIV
                    
 func_call : ID LPAREN arg_list RPAREN
 
 arg_list : empty
 
 arg_list : id
-                     | int_const
-                     | str_const
-                     | id COMMA arg_list
-                     | int_const COMMA arg_list
-                     | str_const COMMA arg_list
+           | int_const
+           | str_const
+           | id COMMA arg_list
+           | int_const COMMA arg_list
+           | str_const COMMA arg_list

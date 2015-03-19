@@ -1,0 +1,17 @@
+untaint get_untaint_input();
+untaint get_system_res();
+taint get_user_inp();
+
+untaint main() {
+    untaint v;
+    untaint v1;
+    v = get_system_res();
+    if( v > 10) {
+        #here v becomes tainted
+        v = v + get_user_inp();
+    }
+    #type check will fail, as untaint to taint assignment is not allowed
+    #we need to assign untaint return value to untaint variable.
+    v1 = get_untaint_input() + 3;
+    return (v1);
+}

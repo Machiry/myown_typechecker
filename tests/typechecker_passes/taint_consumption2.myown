@@ -22,14 +22,18 @@ taint fact(taint x) {
 untaint main() {
     taint input;
     taint input1;
-    taint san_input;
+    untaint san_input;
     
     input = user_input();
     input1 = input;
     san_input = sanitize(input);
         
     if(san_input < 1024) {        
+        #here input1 will be consumed by function sanitize as its a sanitizer.
         sanitize(input1); 
     }
-    input1 = input1 + 1;
+    #type checking fails here as input1 is invisible and its type is unknow.
+    #many ways to fix this as main problem is that input1 has no type.
+    #chaging it to a variable of known type
+    san_input = san_input + 1;
 }

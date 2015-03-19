@@ -1,0 +1,37 @@
+untaint sanitize(taint y);
+taint user_input();
+untaint untaint_int(taint x);
+
+#This is factorial function
+
+taint fact(taint x) {
+    taint y;
+    untaint x_untaint;
+    taint x1;
+    #We need to assign here to re-use the variable x
+    y = x;
+    x_untaint = untaint_int(x);
+    if((x_untaint < 0) | (x_untaint == 0)) {
+        return (1);
+    }
+    x1 = y -1;
+    return (y * fact(x1));    
+}
+
+#This is main
+untaint main() {
+    taint input;
+    taint input1;
+    untaint san_input;
+    
+    input = user_input();
+    input1 = input;
+    san_input = sanitize(input);
+        
+    if(san_input < 1024) {        
+        #here input1 will be consumed by function sanitize as its a sanitizer.
+        sanitize(input1); 
+    }
+    #type checking fails here as input1 is invisible and its type is unknow.
+    input1 = input1 + 1;
+}

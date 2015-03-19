@@ -1,0 +1,26 @@
+untaint sanitize(taint y);
+taint user_input();
+untaint get_system_input();
+untaint secure_function();
+
+
+untaint main() {
+    taint input;
+    untaint san_input;
+    untaint system_input;
+
+    system_input = get_system_input();
+
+    #san_input is untainted here
+    san_input = sanitize(input);
+
+    if(system_input > 1024) {
+	#san_input will become tainted here
+	san_input = san_input + user_input();
+    }
+    
+    #Type checking will fail here as san_input is tainted.
+    if(san_input < 1024) {        
+        secure_function(); 
+    }
+}
